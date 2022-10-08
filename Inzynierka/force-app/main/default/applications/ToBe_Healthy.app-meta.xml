@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>ToBe Healthy</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>New_Product__c</tabs>
+    <tabs>Dish__c</tabs>
+    <tabs>Dish_has_product__c</tabs>
+    <tabs>Descriptor__c</tabs>
+    <tabs>Meal_Type__c</tabs>
+    <tabs>Meal_type_has_dish__c</tabs>
+    <tabs>Meal_type_has_product__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>ToBe_Healthy_UtilityBar</utilityBar>
+</CustomApplication>

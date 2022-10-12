@@ -156,7 +156,7 @@
     <label>Meal type has dish</label>
     <nameField>
         <label>Meal type has dish Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>MealTypeHasDishes</pluralLabel>
     <searchLayouts></searchLayouts>

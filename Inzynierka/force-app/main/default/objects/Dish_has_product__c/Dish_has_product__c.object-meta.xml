@@ -156,7 +156,7 @@
     <label>Dish has product</label>
     <nameField>
         <label>Dish has product Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>DishHasProducts</pluralLabel>
     <searchLayouts></searchLayouts>

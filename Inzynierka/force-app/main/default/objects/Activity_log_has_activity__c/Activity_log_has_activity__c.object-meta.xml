@@ -153,12 +153,12 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Activity Log</label>
+    <label>Activity log has activity</label>
     <nameField>
-        <label>Activity Log Id</label>
+        <label>Activity log has activity Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>ActivityLogs</pluralLabel>
+    <pluralLabel>Activity logs has activity</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

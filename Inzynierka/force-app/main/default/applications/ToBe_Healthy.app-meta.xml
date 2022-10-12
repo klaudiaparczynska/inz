@@ -18,6 +18,9 @@
     <tabs>Meal_Type__c</tabs>
     <tabs>Meal_type_has_dish__c</tabs>
     <tabs>Meal_type_has_product__c</tabs>
+    <tabs>Activity_Log__c</tabs>
+    <tabs>Activity__c</tabs>
+    <tabs>Activity_log_has_activity__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>ToBe_Healthy_UtilityBar</utilityBar>
 </CustomApplication>

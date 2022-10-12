@@ -8,7 +8,7 @@
         <actionName>getMenusToFlow</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>tst</targetReference>
+            <targetReference>GetActivityLog</targetReference>
         </connector>
         <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
@@ -41,6 +41,55 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>GetActivities</name>
+        <label>GetActivities</label>
+        <locationX>176</locationX>
+        <locationY>638</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>tst</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Activity_Log__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>GetActivityLog.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Activity_log_has_activity__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GetActivityLog</name>
+        <label>GetActivityLog</label>
+        <locationX>176</locationX>
+        <locationY>518</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>GetActivities</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Date__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Date</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>User__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Activity_Log__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordLookups>
         <name>getMenu</name>
         <label>getMenu</label>
@@ -97,8 +146,8 @@
         <name>tst</name>
         <label>tst</label>
         <locationX>176</locationX>
-        <locationY>518</locationY>
-        <allowBack>true</allowBack>
+        <locationY>758</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
@@ -107,9 +156,18 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>test</name>
-            <fieldText>&lt;p&gt;{!GetMenuTypes.mealTypeProductOutput}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>GetBreakfastMenu</name>
+            <extensionName>c:printMenus</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>products</name>
+                <value>
+                    <elementReference>GetMenuTypes.breakfastProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
             <name>SecondBreakfast</name>
@@ -117,9 +175,37 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>Second_Breakfast</name>
+            <extensionName>c:printMenus</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>products</name>
+                <value>
+                    <elementReference>GetMenuTypes.secondBreakfastProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
             <name>Lunch</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;Lunch&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>LunchProducts</name>
+            <extensionName>c:printMenus</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>products</name>
+                <value>
+                    <elementReference>GetMenuTypes.lunchProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
             <name>Snack</name>
@@ -127,10 +213,44 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
+            <name>SnackProducts</name>
+            <extensionName>c:printMenus</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>products</name>
+                <value>
+                    <elementReference>GetMenuTypes.snackProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
             <name>Dinner</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;Dinner&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
+        <fields>
+            <name>DinnerProducts</name>
+            <extensionName>c:printMenus</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>products</name>
+                <value>
+                    <elementReference>GetMenuTypes.dinnerProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>YourActivites</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;Your activities&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <nextOrFinishButtonLabel>Choose other date</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>

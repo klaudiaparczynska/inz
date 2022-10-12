@@ -3,7 +3,7 @@
     <fullName>Carbohydrates__c</fullName>
     <externalId>false</externalId>
     <label>Carbohydrates</label>
-    <precision>5</precision>
+    <precision>3</precision>
     <required>true</required>
     <scale>1</scale>
     <trackTrending>false</trackTrending>

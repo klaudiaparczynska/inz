@@ -167,6 +167,9 @@
             <name>Goal</name>
             <choiceReferences>Goals</choiceReferences>
             <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>userData.Goal__c</elementReference>
+            </defaultValue>
             <fieldText>Goal</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>
@@ -219,6 +222,9 @@
             <name>PAL</name>
             <choiceReferences>pals</choiceReferences>
             <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>userData.PAL__c</elementReference>
+            </defaultValue>
             <fieldText>PAL</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>false</isRequired>

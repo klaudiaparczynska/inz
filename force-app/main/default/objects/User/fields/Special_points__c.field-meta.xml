@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <label>Special points</label>
     <precision>6</precision>
-    <required>true</required>
+    <required>false</required>
     <scale>0</scale>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Number</type>

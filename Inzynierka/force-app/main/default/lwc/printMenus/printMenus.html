@@ -1,0 +1,9 @@
+<template>
+    <lightning-card>
+        <template for:each={products} for:item="p">
+            <lightning-card title={p.name} key={p.name}>
+                <h3>{p.calories} kcal    {p.protein} g proteins    {p.fat} g fats    {p.carbohydrates} g carbohydrates</h3>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>

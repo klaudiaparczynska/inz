@@ -5,9 +5,9 @@
     <externalId>false</externalId>
     <label>Activity</label>
     <referenceTo>Activity__c</referenceTo>
-    <relationshipLabel>ActivityLogs</relationshipLabel>
-    <relationshipName>ActivityLogs</relationshipName>
-    <required>false</required>
+    <relationshipLabel>Activity logs has activity</relationshipLabel>
+    <relationshipName>Activity_logs_has_activity</relationshipName>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

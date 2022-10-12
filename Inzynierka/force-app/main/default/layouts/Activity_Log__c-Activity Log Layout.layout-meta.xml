@@ -11,16 +11,8 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>Time__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Activity__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Burned_calories__c</field>
+                <field>Activity__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -29,10 +21,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>User__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Activity_points__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -71,6 +59,10 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Activity_log_has_activity__c.Activity_Log__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

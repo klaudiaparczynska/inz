@@ -4,7 +4,7 @@
     <description>Burned calories/1h activity</description>
     <externalId>false</externalId>
     <label>Burned calories</label>
-    <precision>18</precision>
+    <precision>4</precision>
     <required>true</required>
     <scale>0</scale>
     <trackTrending>false</trackTrending>

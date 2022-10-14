@@ -200,9 +200,9 @@
         <label>CreateProduct</label>
         <locationX>314</locationX>
         <locationY>638</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>DishAdd</targetReference>
         </connector>

@@ -13,22 +13,21 @@ public with sharing class DishHasProductHelper {
         }
         System.debug(productsDetails);
         List<New_Product__c> productsToCountCalories = [SELECT Id, Calories__c, Carbohydrates__c, Fat__c, Protein__c FROM New_Product__c WHERE Id IN :productsDetails.keySet()];
-        Decimal productCalories = 0;
-        Decimal productCarbohydrates = 0;
-        Decimal productFat = 0;
-        Decimal productProtein = 0;
+        Map<String, Decimal> macros = new Map<String, Decimal>{'kcal' => 0, 'carbo' => 0, 'fat' => 0, 'protein' => 0, 'gram' => 0};
         for(New_Product__c product : productsToCountCalories) {
             Decimal productGrammage = productsDetails.get(product.Id)/100;
-            productCalories += product.Calories__c * productGrammage;
-            productCarbohydrates += product.Carbohydrates__c * productGrammage;
-            productFat += product.Fat__c * productGrammage;
-            productProtein += product.Protein__c * productGrammage;
+            macros.put('kcal', ( macros.get('kcal') + product.Calories__c * productGrammage));
+            macros.put('carbo', ( macros.get('carbo') + product.Carbohydrates__c * productGrammage));
+            macros.put('fat', ( macros.get('fat') + product.Fat__c * productGrammage));
+            macros.put('protein', ( macros.get('protein') + product.Protein__c * productGrammage));
+            macros.put('gram', ( macros.get('gram') + productGrammage));
+            
         }
         Dish__c dish = [SELECT Id, Total_calories__c, Total_carbohydrates__c, Total_fats__c, Total_proteins__c FROM Dish__c WHERE Id =: newRecords[0].Dish__c];
-        dish.Total_calories__c = productCalories;
-        dish.Total_carbohydrates__c = productCarbohydrates;
-        dish.Total_fats__c = productFat;
-        dish.Total_proteins__c = productProtein;
+        dish.Total_calories__c = macros.get('kcal')/macros.get('gram');
+        dish.Total_carbohydrates__c = macros.get('carbo')/macros.get('gram');
+        dish.Total_fats__c = macros.get('fat')/macros.get('gram');
+        dish.Total_proteins__c = macros.get('protein')/macros.get('gram');
         update dish;
     }
 }

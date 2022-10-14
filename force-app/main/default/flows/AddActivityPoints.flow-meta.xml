@@ -26,7 +26,7 @@
             <assignToReference>Points</assignToReference>
             <operator>Add</operator>
             <value>
-                <numberValue>1.0</numberValue>
+                <elementReference>Time</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -58,7 +58,7 @@
             <assignToReference>Points</assignToReference>
             <operator>Add</operator>
             <value>
-                <numberValue>2.0</numberValue>
+                <elementReference>ForActivityGreater500kcal</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -90,6 +90,18 @@
             <label>BurnedCaloriesGreaterThan500</label>
         </rules>
     </decisions>
+    <formulas>
+        <name>ForActivityGreater500kcal</name>
+        <dataType>Number</dataType>
+        <expression>{!Time}*2</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>Time</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Time__c}/10</expression>
+        <scale>0</scale>
+    </formulas>
     <interviewLabel>AddActivityPoints {!$Flow.CurrentDateTime}</interviewLabel>
     <label>AddActivityPoints</label>
     <processMetadataValues>

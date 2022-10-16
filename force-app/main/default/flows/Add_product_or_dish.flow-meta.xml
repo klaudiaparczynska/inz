@@ -94,13 +94,13 @@
         <inputAssignments>
             <field>Dish__c</field>
             <value>
-                <elementReference>Dishes</elementReference>
+                <elementReference>pickDishToMenu.recordId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Grammage__c</field>
             <value>
-                <elementReference>TypeGrammage</elementReference>
+                <elementReference>Grammage</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -132,7 +132,7 @@
         <inputAssignments>
             <field>New_Product__c</field>
             <value>
-                <elementReference>ProductPick</elementReference>
+                <elementReference>pickProduct.recordId</elementReference>
             </value>
         </inputAssignments>
         <object>Meal_type_has_product__c</object>
@@ -268,12 +268,38 @@
             <targetReference>GetMealType_0</targetReference>
         </connector>
         <fields>
-            <name>Choose_dish</name>
-            <choiceReferences>Dishes</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Choose dish</fieldText>
-            <fieldType>RadioButtons</fieldType>
+            <name>pickDishToMenu</name>
+            <extensionName>flowruntime:lookup</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>fieldApiName</name>
+                <value>
+                    <stringValue>Dish__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Pick dish</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>Meal_type_has_dish__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Grammage</name>
+            <dataType>Number</dataType>
+            <fieldText>Grammage</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
@@ -315,12 +341,30 @@
             <targetReference>GetMealType</targetReference>
         </connector>
         <fields>
-            <name>Choose_product</name>
-            <choiceReferences>ProductPick</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Choose product</fieldText>
-            <fieldType>DropdownBox</fieldType>
+            <name>pickProduct</name>
+            <extensionName>flowruntime:lookup</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>fieldApiName</name>
+                <value>
+                    <stringValue>New_Product__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Pick product</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>Meal_type_has_product__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
             <name>TypeGrammage</name>

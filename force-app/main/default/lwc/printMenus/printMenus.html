@@ -5,5 +5,10 @@
                 <h3>{p.calories} kcal    {p.protein} g proteins    {p.fat} g fats    {p.carbohydrates} g carbohydrates</h3>
             </lightning-card>
         </template>
+        <template for:each={dishes} for:item="d">
+            <lightning-card title={d.name} key={d.name}>
+                <h3>{d.calories} kcal    {d.protein} g proteins    {d.fat} g fats    {d.carbohydrates} g carbohydrates</h3>
+            </lightning-card>
+        </template>
     </lightning-card>
 </template>

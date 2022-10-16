@@ -9,6 +9,7 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
             <property name="products" type="apex://ProductTest[]" label="Current products" />
+            <property name="dishes" type="apex://Dish[]" label="Current dishes" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

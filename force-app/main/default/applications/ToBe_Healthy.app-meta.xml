@@ -19,6 +19,7 @@
     <label>ToBe Healthy</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
+    <tabs>Profile</tabs>
     <tabs>New_Product__c</tabs>
     <tabs>Dish__c</tabs>
     <tabs>Dish_has_product__c</tabs>

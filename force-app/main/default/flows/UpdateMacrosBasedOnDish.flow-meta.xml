@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>55.0</apiVersion>
+    <apiVersion>56.0</apiVersion>
     <decisions>
-        <name>insertOrUpdateIf</name>
-        <label>insertOrUpdateIf</label>
+        <name>insertOrUpdate</name>
+        <label>insertOrUpdate</label>
         <locationX>182</locationX>
         <locationY>335</locationY>
         <defaultConnector>
@@ -14,73 +14,73 @@
             <name>insert</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>insertOrUpdate</leftValueReference>
+                <leftValueReference>IsNew</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>insertMacros</targetReference>
+                <targetReference>GetMacros</targetReference>
             </connector>
             <label>insert</label>
         </rules>
     </decisions>
     <formulas>
-        <name>caloriesInsert</name>
+        <name>Calories</name>
         <dataType>Number</dataType>
-        <expression>{!$Record.Meal_Type__r.Total_calories__c}+{!$Record.New_Product__r.Calories__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>{!$Record.Meal_Type__r.Total_calories__c}+({!$Record.Dish__r.Total_calories__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <name>caloriesUpdate</name>
         <dataType>Number</dataType>
-        <expression>({!$Record__Prior.Meal_Type__r.Total_calories__c}-{!$Record__Prior.New_Product__r.Calories__c}*{!$Record__Prior.Grammage__c}/100)+{!$Record.New_Product__r.Calories__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>({!$Record__Prior.Meal_Type__r.Total_calories__c}-{!$Record__Prior.Dish__r.Total_calories__c}*{!$Record__Prior.Grammage__c}/100)+({!$Record.Dish__r.Total_calories__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
-        <name>carbohydratesInsert</name>
+        <name>Carbohydrates</name>
         <dataType>Number</dataType>
-        <expression>{!$Record.Meal_Type__r.Total_carbohydrates__c}+{!$Record.New_Product__r.Carbohydrates__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>{!$Record.Meal_Type__r.Total_carbohydrates__c}+({!$Record.Dish__r.Total_carbohydrates__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <name>carbohydratesUpdate</name>
         <dataType>Number</dataType>
-        <expression>({!$Record__Prior.Meal_Type__r.Total_carbohydrates__c}-{!$Record__Prior.New_Product__r.Carbohydrates__c}*{!$Record__Prior.Grammage__c}/100)+{!$Record.New_Product__r.Carbohydrates__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>({!$Record__Prior.Meal_Type__r.Total_carbohydrates__c}-{!$Record__Prior.Dish__r.Total_carbohydrates__c}*{!$Record__Prior.Grammage__c}/100)+({!$Record.Dish__r.Total_carbohydrates__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
-        <name>fatInsert</name>
+        <name>Fats</name>
         <dataType>Number</dataType>
-        <expression>{!$Record.Meal_Type__r.Total_fats__c}+{!$Record.New_Product__r.Fat__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>{!$Record.Meal_Type__r.Total_fats__c}+({!$Record.Dish__r.Total_fats__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <name>fatUpdate</name>
         <dataType>Number</dataType>
-        <expression>({!$Record__Prior.Meal_Type__r.Total_fats__c}-{!$Record__Prior.New_Product__r.Fat__c}*{!$Record__Prior.Grammage__c}/100)+{!$Record.New_Product__r.Fat__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>({!$Record__Prior.Meal_Type__r.Total_fats__c}-{!$Record__Prior.Dish__r.Total_fats__c}*{!$Record__Prior.Grammage__c}/100)+({!$Record.Dish__r.Total_fats__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
-        <name>insertOrUpdate</name>
+        <name>IsNew</name>
         <dataType>Boolean</dataType>
         <expression>ISNEW()</expression>
     </formulas>
     <formulas>
-        <name>proteinInsert</name>
+        <name>Proteins</name>
         <dataType>Number</dataType>
-        <expression>{!$Record.Meal_Type__r.Total_proteins__c}+{!$Record.New_Product__r.Protein__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>{!$Record.Meal_Type__r.Total_proteins__c}+({!$Record.Dish__r.Total_proteins__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <name>proteinUpdate</name>
         <dataType>Number</dataType>
-        <expression>({!$Record__Prior.Meal_Type__r.Total_proteins__c}-{!$Record__Prior.New_Product__r.Protein__c}*{!$Record__Prior.Grammage__c}/100)+{!$Record.New_Product__r.Protein__c}*{!$Record.Grammage__c}/100</expression>
+        <expression>({!$Record__Prior.Meal_Type__r.Total_proteins__c}-{!$Record__Prior.Dish__r.Total_proteins__c}*{!$Record__Prior.Grammage__c}/100)+({!$Record.Dish__r.Total_proteins__c}*{!$Record.Grammage__c}/100)</expression>
         <scale>2</scale>
     </formulas>
-    <interviewLabel>UpdateMacros {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>UpdateMacros</label>
+    <interviewLabel>UpdateMacrosBasedOnDish {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>UpdateMacrosBasedOnDish</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -101,8 +101,8 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
-        <name>insertMacros</name>
-        <label>insertMacros</label>
+        <name>GetMacros</name>
+        <label>GetMacros</label>
         <locationX>50</locationX>
         <locationY>455</locationY>
         <filterLogic>and</filterLogic>
@@ -116,25 +116,25 @@
         <inputAssignments>
             <field>Total_calories__c</field>
             <value>
-                <elementReference>caloriesInsert</elementReference>
+                <elementReference>Calories</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Total_carbohydrates__c</field>
             <value>
-                <elementReference>carbohydratesInsert</elementReference>
+                <elementReference>Carbohydrates</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Total_fats__c</field>
             <value>
-                <elementReference>fatInsert</elementReference>
+                <elementReference>Fats</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Total_proteins__c</field>
             <value>
-                <elementReference>proteinInsert</elementReference>
+                <elementReference>Proteins</elementReference>
             </value>
         </inputAssignments>
         <object>Meal_Type__c</object>
@@ -182,9 +182,9 @@
         <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>insertOrUpdateIf</targetReference>
+            <targetReference>insertOrUpdate</targetReference>
         </connector>
-        <object>Meal_type_has_product__c</object>
+        <object>Meal_type_has_dish__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>

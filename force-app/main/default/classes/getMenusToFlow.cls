@@ -27,7 +27,7 @@ global with sharing class getMenusToFlow {
             macros.add(prod.Fat__c*grammage);
             macros.add(prod.Carbohydrates__c*grammage);
             productsOutput.put(prod.Name, macros);
-            ProductTest product = new ProductTest(prod.Name, prod.Calories__c*grammage, prod.Protein__c*grammage,
+            ProductTest product = new ProductTest(prod.Id, mealTypeHasProducts ,prod.Name, prod.Calories__c*grammage, prod.Protein__c*grammage,
             prod.Fat__c*grammage, prod.Carbohydrates__c*grammage);
             products.add(product);
         }

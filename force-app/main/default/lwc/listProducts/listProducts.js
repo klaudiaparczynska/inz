@@ -1,6 +1,5 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
-import getLinkName from '@salesforce/apex/LinkNameHelper.getMealId';
 
 const productDetails= [
     {
@@ -20,34 +19,24 @@ const productDetails= [
 
 export default class ListProducts extends NavigationMixin(LightningElement) {
     @api products;
+    @api mealName;
     @track markers;
     columns=productDetails;
     helpProducts;
-    listOfProducts;
-    show=false;
+
+    connectedCallback(){
+        this.showProducts();
+    }
 
     showProducts(){
-        this.show=true;
-        let linkname = [];
-        console.log("--------------");
-        console.log(this.products);
-        console.log(this.products.length);
         if (this.products) {
-            console.log('tu');
             let helper = [];
+            
             for(let i = 0; i < this.products.length; i++) {
-                console.log(this.products[i].id);
-                console.log(this.products[i].name);
-                console.log(this.products[i].calories);
-                console.log(this.products[i].protein);
-                console.log(this.products[i].fat);
-                getLinkName({meals: this.products[i].mealTypes, productId: this.products[i].id})
-                .then(result =>{
-                    linkname=result;
-                    console.log('lenght'+linkname.length);
-                    console.log('xd'+linkname)
-                }).catch(error => {
-                    this.error = error;
+                let x = this.products[i].mealTypes.filter(value =>{
+                    return value.New_Product__c == this.products[i].id;
+                }).map(v=>{
+                    return v.Id;
                 });
 
                 helper.push({
@@ -57,44 +46,12 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                     Protein: this.products[i].protein,
                     Fat: this.products[i].fat,
                     Carbohydrates: this.products[i].carbohydrates,
-                    LinkName: '/' + linkname
+                    LinkName : '/' + x[0]
                 })
-                console.log(helper);
-                
             }
-            this.listOfProducts = helper;
             this.helpProducts = helper;
-            console.log('------------'+this.listOfProducts);
+            this.show=true;
         }
-        }
-     
-    handleSearchChange( event ) {
-        this.searchString = event.detail.value;
-    }
-
-    handleSearch( event ) {
-        const searchKey = event.target.value.toLowerCase();
-        if ( searchKey ) {
-            this.listOfProducts = this.helpProducts;   
-            if ( this.listOfProducts ) {
-                let recs = [];
-                for ( let rec of this.listOfProducts ) {
-                    let valuesArray = Object.values( rec );
-                    for ( let val of valuesArray ) {
-                        let strVal = String( val );
-                        if ( strVal ) {
-                            if ( strVal.toLowerCase().includes( searchKey ) ) {
-                                recs.push( rec );
-                                break;
-                            }
-                        }
-                    }
-                }
-                this.listOfProducts = recs;
-             }
-        }  else {
-            this.listOfProducts = this.helpProducts;
-        }        
-    }
+        }       
 }
 

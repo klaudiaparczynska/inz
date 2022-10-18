@@ -4,7 +4,7 @@
         <name>GetMenuTypes</name>
         <label>GetMenuTypes</label>
         <locationX>176</locationX>
-        <locationY>398</locationY>
+        <locationY>1670</locationY>
         <actionName>getMenusToFlow</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -21,10 +21,26 @@
     </actionCalls>
     <apiVersion>55.0</apiVersion>
     <assignments>
+        <name>assignment</name>
+        <label>assignment</label>
+        <locationX>308</locationX>
+        <locationY>1454</locationY>
+        <assignmentItems>
+            <assignToReference>getMenu</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Copy_1_of_getMenu</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>GetMenuTypes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Macros</name>
         <label>Macros</label>
         <locationX>264</locationX>
-        <locationY>638</locationY>
+        <locationY>1910</locationY>
         <assignmentItems>
             <assignToReference>totalCalories</assignToReference>
             <operator>Add</operator>
@@ -57,13 +73,119 @@
             <targetReference>getMacros</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>mealTypeToList</name>
+        <label>mealTypeToList</label>
+        <locationX>396</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>createMealTypeRecord</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>singleMealType</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>createMealTypes</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>setName</name>
+        <label>setName</label>
+        <locationX>396</locationX>
+        <locationY>878</locationY>
+        <assignmentItems>
+            <assignToReference>singleMealType.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>getNameMealType</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>mealTypeToList</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>singleMealTypeCreate</name>
+        <label>singleMealTypeCreate</label>
+        <locationX>396</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>singleMealType.Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Date</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleMealType.User__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleMealType.Descriptor__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>createMealTypes.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>setName</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>ifNotExist</name>
+        <label>menuExist</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <defaultConnector>
+            <targetReference>getAllMeals</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>ifNotExist</defaultConnectorLabel>
+        <rules>
+            <name>ifExist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getMenu</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>GetMenuTypes</targetReference>
+            </connector>
+            <label>ifExist</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>getNameMealType</name>
+        <dataType>String</dataType>
+        <expression>{!$User.FirstName}&amp;{!$User.LastName}&amp;{!$User.Username}&amp;TEXT({!singleMealType.Date__c})&amp;{!singleMealType.Descriptor__r.Name}</expression>
+    </formulas>
     <interviewLabel>FlowShowMenu {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Your menu</label>
+    <loops>
+        <name>createMealTypes</name>
+        <label>createMealTypes</label>
+        <locationX>308</locationX>
+        <locationY>638</locationY>
+        <collectionReference>getAllMeals</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>singleMealTypeCreate</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>createMultipleTypeRecords</targetReference>
+        </noMoreValuesConnector>
+    </loops>
     <loops>
         <name>getMacros</name>
         <label>getMacros</label>
         <locationX>176</locationX>
-        <locationY>518</locationY>
+        <locationY>1790</locationY>
         <collectionReference>getMenu</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -92,6 +214,57 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <name>createMultipleTypeRecords</name>
+        <label>createMultipleTypeRecords</label>
+        <locationX>308</locationX>
+        <locationY>1214</locationY>
+        <connector>
+            <targetReference>Copy_1_of_getMenu</targetReference>
+        </connector>
+        <inputReference>createMealTypeRecord</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <name>Copy_1_of_getMenu</name>
+        <label>Copy 1 of getMenu</label>
+        <locationX>308</locationX>
+        <locationY>1334</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>assignment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>User__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Date__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Date</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Meal_Type__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getAllMeals</name>
+        <label>getAllMeals</label>
+        <locationX>308</locationX>
+        <locationY>518</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>createMealTypes</targetReference>
+        </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Descriptor__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordLookups>
         <name>getMenu</name>
         <label>getMenu</label>
@@ -99,7 +272,7 @@
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>GetMenuTypes</targetReference>
+            <targetReference>ifNotExist</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -148,7 +321,7 @@
         <name>Print_Menus</name>
         <label>Print Menus</label>
         <locationX>176</locationX>
-        <locationY>854</locationY>
+        <locationY>2126</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -171,6 +344,12 @@
                 <name>mealName</name>
                 <value>
                     <stringValue>Breakfast</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>dishes</name>
+                <value>
+                    <elementReference>GetMenuTypes.breakfastDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -198,6 +377,12 @@
                     <elementReference>GetMenuTypes.secondBreakfastProducts</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>dishes</name>
+                <value>
+                    <elementReference>GetMenuTypes.secondBreakfastDishes</elementReference>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -221,6 +406,12 @@
                 <name>products</name>
                 <value>
                     <elementReference>GetMenuTypes.lunchProducts</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>dishes</name>
+                <value>
+                    <elementReference>GetMenuTypes.lunchDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -248,6 +439,12 @@
                     <elementReference>GetMenuTypes.snackProducts</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>dishes</name>
+                <value>
+                    <elementReference>GetMenuTypes.snackDishes</elementReference>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -273,6 +470,12 @@
                     <elementReference>GetMenuTypes.dinnerProducts</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>dishes</name>
+                <value>
+                    <elementReference>GetMenuTypes.dinnerDishes</elementReference>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -294,6 +497,22 @@
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>createMealTypeRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Meal_Type__c</objectType>
+    </variables>
+    <variables>
+        <name>singleMealType</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Meal_Type__c</objectType>
+    </variables>
     <variables>
         <name>totalCalories</name>
         <dataType>Number</dataType>

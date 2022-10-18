@@ -158,8 +158,8 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>GetBreakfastMenu</name>
-            <extensionName>c:printMenus</extensionName>
+            <name>getList</name>
+            <extensionName>c:listProducts</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>products</name>
@@ -168,9 +168,9 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>dishes</name>
+                <name>mealName</name>
                 <value>
-                    <elementReference>GetMenuTypes.breakfastDishes</elementReference>
+                    <stringValue>Breakfast</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -183,19 +183,19 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Second_Breakfast</name>
-            <extensionName>c:printMenus</extensionName>
+            <name>get2nd</name>
+            <extensionName>c:listProducts</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mealName</name>
+                <value>
+                    <stringValue>Second breakfast</stringValue>
+                </value>
+            </inputParameters>
             <inputParameters>
                 <name>products</name>
                 <value>
                     <elementReference>GetMenuTypes.secondBreakfastProducts</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>dishes</name>
-                <value>
-                    <elementReference>GetMenuTypes.secondBreakfastDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -208,19 +208,19 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>LunchProducts</name>
-            <extensionName>c:printMenus</extensionName>
+            <name>getLunch</name>
+            <extensionName>c:listProducts</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mealName</name>
+                <value>
+                    <stringValue>Lunch</stringValue>
+                </value>
+            </inputParameters>
             <inputParameters>
                 <name>products</name>
                 <value>
                     <elementReference>GetMenuTypes.lunchProducts</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>dishes</name>
-                <value>
-                    <elementReference>GetMenuTypes.lunchDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -233,19 +233,19 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>SnackProducts</name>
-            <extensionName>c:printMenus</extensionName>
+            <name>getSnack</name>
+            <extensionName>c:listProducts</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mealName</name>
+                <value>
+                    <stringValue>Snack</stringValue>
+                </value>
+            </inputParameters>
             <inputParameters>
                 <name>products</name>
                 <value>
                     <elementReference>GetMenuTypes.snackProducts</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>dishes</name>
-                <value>
-                    <elementReference>GetMenuTypes.snackDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -258,19 +258,19 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>DinnerProducts</name>
-            <extensionName>c:printMenus</extensionName>
+            <name>getDinner</name>
+            <extensionName>c:listProducts</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>mealName</name>
+                <value>
+                    <stringValue>Dinner</stringValue>
+                </value>
+            </inputParameters>
             <inputParameters>
                 <name>products</name>
                 <value>
                     <elementReference>GetMenuTypes.dinnerProducts</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>dishes</name>
-                <value>
-                    <elementReference>GetMenuTypes.dinnerDishes</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>

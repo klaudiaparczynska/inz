@@ -1,16 +1,13 @@
 <template>
     <lightning-card variant="narrow" icon-name="action:new_note">
-        <h1 slot="title">All Voting Locations</h1>
-        <lightning-button label="Show products" onclick={showProducts}></lightning-button>
-        <template if:true={show}>
-        <lightning-input type=”search” label="Search Voting Campaigns" onchange={handleSearch} style="margin-left:1%; margin-right:1%;"></lightning-input><br/><br/>
+        <h1 slot="title">{mealName} products</h1>   
+        <template if:true={helpProducts}>
         <div style="height: 300px;">
             <lightning-datatable
                     key-field="Id"
-                    data={listOfProducts}
+                    data={helpProducts}
                     columns={columns}
                     hide-checkbox-column="true">
-                    
             </lightning-datatable>
         </div>
     </template>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Burned_calories__c</fullName>
+    <fullName>User__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Burned calories</label>
-    <precision>18</precision>
+    <label>User</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>Rankings</relationshipName>
     <required>false</required>
-    <scale>0</scale>
     <trackTrending>false</trackTrending>
-    <type>Number</type>
-    <unique>false</unique>
+    <type>Lookup</type>
 </CustomField>

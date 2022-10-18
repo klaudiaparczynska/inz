@@ -27,7 +27,7 @@ global with sharing class getMenusToFlow {
             macros.add(prod.Fat__c*grammage);
             macros.add(prod.Carbohydrates__c*grammage);
             productsOutput.put(prod.Name, macros);
-            ProductTest product = new ProductTest(prod.Id, mealTypeHasProducts ,prod.Name, prod.Calories__c*grammage, prod.Protein__c*grammage,
+            ProductTest product = new ProductTest(prod.Id, mealTypeHasProducts, prod.Name, prod.Calories__c*grammage, prod.Protein__c*grammage,
             prod.Fat__c*grammage, prod.Carbohydrates__c*grammage);
             products.add(product);
         }
@@ -52,7 +52,7 @@ global with sharing class getMenusToFlow {
             List<Decimal> macros = new List<Decimal>();
             Dish__c dsh = newDishes.get(id);
             Decimal grammage = dishesAndGrammage.get(id)/100;
-            Dish dish = new Dish(dsh.Name, dsh.Total_calories__c*grammage, dsh.Total_proteins__c*grammage,
+            Dish dish = new Dish(dsh.Id, mealTypeHasDishes, dsh.Name, dsh.Total_calories__c*grammage, dsh.Total_proteins__c*grammage,
             dsh.Total_fats__c*grammage, dsh.Total_carbohydrates__c*grammage);
             dishes.add(dish);
         }

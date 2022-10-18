@@ -1,11 +1,11 @@
 <template>
     <lightning-card variant="narrow" icon-name="action:new_note">
-        <h1 slot="title">{mealName} products</h1>   
-        <template if:true={helpProducts}>
+        <h1 slot="title">{mealName} products and dishes</h1>   
+        <template if:true={productsAndDishes}>
         <div style="height: 300px;">
             <lightning-datatable
                     key-field="Id"
-                    data={helpProducts}
+                    data={productsAndDishes}
                     columns={columns}
                     hide-checkbox-column="true">
             </lightning-datatable>

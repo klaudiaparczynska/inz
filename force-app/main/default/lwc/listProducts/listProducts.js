@@ -19,23 +19,23 @@ const productDetails= [
 
 export default class ListProducts extends NavigationMixin(LightningElement) {
     @api products;
+    @api dishes;
     @api mealName;
     @track markers;
     columns=productDetails;
-    helpProducts;
+    productsAndDishes;
 
     connectedCallback(){
-        this.showProducts();
+        this.showProductsAndDishes();
     }
 
-    showProducts(){
+    showProductsAndDishes(){
+        let helper = [];
         if (this.products) {
-            let helper = [];
-            
             for(let i = 0; i < this.products.length; i++) {
-                let x = this.products[i].mealTypes.filter(value =>{
+                let mealTypeHasProductId = this.products[i].mealTypes.filter(value =>{
                     return value.New_Product__c == this.products[i].id;
-                }).map(v=>{
+                }).map(v => {
                     return v.Id;
                 });
 
@@ -46,11 +46,30 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                     Protein: this.products[i].protein,
                     Fat: this.products[i].fat,
                     Carbohydrates: this.products[i].carbohydrates,
-                    LinkName : '/' + x[0]
+                    LinkName : '/' + mealTypeHasProductId[0]
                 })
             }
-            this.helpProducts = helper;
-            this.show=true;
         }
-        }       
+        if (this.dishes) {
+            for(let i = 0; i < this.dishes.length; i++) {
+                console.log(JSON.stringify(this.dishes[i].mealTypes));
+                let mealTypeHasDishId = this.dishes[i].mealTypes.filter(value =>{
+                    return value.Dish__c == this.dishes[i].dishId;
+                }).map(v=>{
+                    return v.Id;
+                });
+
+                helper.push({
+                    Id: this.dishes[i].dishId,
+                    Name: this.dishes[i].name,
+                    Calories:  this.dishes[i].calories,
+                    Protein: this.dishes[i].protein,
+                    Fat: this.dishes[i].fat,
+                    Carbohydrates: this.dishes[i].carbohydrates,
+                    LinkName : '/' + mealTypeHasDishId[0]
+                })
+            }  
+        }
+        this.productsAndDishes = helper;
+    }   
 }

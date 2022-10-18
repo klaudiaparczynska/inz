@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PAL__c</fullName>
+    <externalId>false</externalId>
+    <label>PAL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lying in bed</fullName>
+                <default>false</default>
+                <label>Lying in bed</label>
+            </value>
+            <value>
+                <fullName>Low physical activity</fullName>
+                <default>false</default>
+                <label>Low physical activity</label>
+            </value>
+            <value>
+                <fullName>Moderate physical activity</fullName>
+                <default>false</default>
+                <label>Moderate physical activity</label>
+            </value>
+            <value>
+                <fullName>Regular exercise 2-3 times a week</fullName>
+                <default>false</default>
+                <label>Regular exercise 2-3 times a week</label>
+            </value>
+            <value>
+                <fullName>Daily exercises</fullName>
+                <default>false</default>
+                <label>Daily exercises</label>
+            </value>
+            <value>
+                <fullName>Professional athlete</fullName>
+                <default>false</default>
+                <label>Professional athlete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

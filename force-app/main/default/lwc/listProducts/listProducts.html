@@ -2,7 +2,7 @@
     <lightning-card variant="narrow" icon-name="action:new_note">
         <h1 slot="title">{mealName} products and dishes</h1>   
         <template if:true={productsAndDishes}>
-        <div style="height: 300px;">
+        <div style="height: auto;">
             <lightning-datatable
                     key-field="Id"
                     data={productsAndDishes}

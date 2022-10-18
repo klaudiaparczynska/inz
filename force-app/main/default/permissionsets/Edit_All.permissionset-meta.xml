@@ -22,11 +22,6 @@
     </classAccesses>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Activity_Log__c.Activity__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Activity_Log__c.User__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -38,6 +33,26 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Activity_log_has_activity__c.Burned_calories__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dish__c.Total_calories__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dish__c.Total_carbohydrates__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dish__c.Total_fats__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dish__c.Total_proteins__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

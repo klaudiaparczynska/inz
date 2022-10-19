@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <formulas>
+        <name>BMR</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!$Record.PAL__c})  = &apos;Lying in bed&apos;, 1.2*{!PPM},
+ IF(TEXT({!$Record.PAL__c})  = &apos;Low physical activity&apos;, 1.4*{!PPM},
+IF(TEXT({!$Record.PAL__c})  = &apos;Moderate physical activity&apos;, 1.6*{!PPM},
+IF(TEXT({!$Record.PAL__c})  = &apos;Regular exercise 2-3 times a week&apos;, 1.75*{!PPM},
+IF(TEXT({!$Record.PAL__c})  = &apos;Daily exercises&apos;, 2.0*{!PPM}, 2.4*{!PPM}
+)
+)
+)
+)
+)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Kcal</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!$Record.Goal__c})  = &apos;Rapid weight loss&apos;, {!BMR}+1000,
+IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight loss&apos;, {!BMR}+750,
+IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight loss&apos;, {!BMR}+500,
+IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight loss&apos;, {!BMR}+250,
+IF(TEXT({!$Record.Goal__c})  = &apos;Keeping weight&apos;, {!BMR},
+IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight gain&apos;, {!BMR}-250, 
+IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight gain&apos;, {!BMR}-500,
+IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}-1000
+)
+)
+)
+)
+)
+)
+)
+)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>PPM</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!$Record.Gender__c}) = &apos;Male&apos;,
+ 66+(13.75*{!$Record.Weight__c})+(5*{!$Record.Height__c})-(6.8*{!$Record.Age__c}),
+ 655+(9.56*{!$Record.Weight__c})+(1.85*{!$Record.Height__c})-(4.7*{!$Record.Age__c}))</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>SetTotalMacros {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>SetTotalMacros</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>UpdateTotalMacros</name>
+        <label>UpdateTotalMacros</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <inputAssignments>
+            <field>Total_Calories__c</field>
+            <value>
+                <elementReference>Kcal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Total_Carbohydrates__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Total_Fat__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Total_Proteins__c</field>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>UpdateTotalMacros</targetReference>
+        </connector>
+        <object>User</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

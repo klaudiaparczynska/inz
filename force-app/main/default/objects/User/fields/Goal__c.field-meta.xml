@@ -11,19 +11,67 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Lose weight</fullName>
+                <fullName>Rapid weight loss (~1kg per week)</fullName>
                 <default>false</default>
-                <label>Lose weight</label>
+                <label>Rapid weight loss</label>
             </value>
             <value>
-                <fullName>Keep weight</fullName>
+                <fullName>Quick weight loss (~0.75kg per week)</fullName>
                 <default>false</default>
-                <label>Keep weight</label>
+                <label>Quick weight loss</label>
+            </value>
+            <value>
+                <fullName>Moderate weight loss (~0.5kg per week)</fullName>
+                <default>false</default>
+                <label>Moderate weight loss</label>
+            </value>
+            <value>
+                <fullName>Slow weight loss (~0.25kg per week)</fullName>
+                <default>false</default>
+                <label>Slow weight loss</label>
+            </value>
+            <value>
+                <fullName>Keeping weight</fullName>
+                <default>false</default>
+                <label>Keeping weight</label>
+            </value>
+            <value>
+                <fullName>Rapid weight gain (~1kg per week)</fullName>
+                <default>false</default>
+                <label>Rapid weight gain</label>
+            </value>
+            <value>
+                <fullName>Quick weight gain (~0.75kg per week)</fullName>
+                <default>false</default>
+                <label>Quick weight gain</label>
+            </value>
+            <value>
+                <fullName>Moderate weight gain (~0.5kg per week)</fullName>
+                <default>false</default>
+                <label>Moderate weight gain</label>
+            </value>
+            <value>
+                <fullName>Slow weight gain (~0.25kg per week)</fullName>
+                <default>false</default>
+                <label>Slow weight gain</label>
             </value>
             <value>
                 <fullName>Gain weight</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Gain weight</label>
+            </value>
+            <value>
+                <fullName>Keep weight</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Keep weight</label>
+            </value>
+            <value>
+                <fullName>Lose weight</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lose weight</label>
             </value>
         </valueSetDefinition>
     </valueSet>

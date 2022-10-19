@@ -91,6 +91,12 @@
         </rules>
     </decisions>
     <formulas>
+        <name>burnedKcal</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Activity__r.Burned_calories__c}*{!$Record.Time__c}/60</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
         <name>ForActivityGreater500kcal</name>
         <dataType>Number</dataType>
         <expression>{!Time}*2</expression>
@@ -124,10 +130,32 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
+        <name>burnedKcalUpdate</name>
+        <label>burnedKcalUpdate</label>
+        <locationX>314</locationX>
+        <locationY>815</locationY>
+        <inputAssignments>
+            <field>Activity_points__c</field>
+            <value>
+                <elementReference>Time</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Burned_calories__c</field>
+            <value>
+                <elementReference>burnedKcal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>Copy_1_of_UpdateUserActivityPoints</name>
         <label>Copy 1 of UpdateUserActivityPoints</label>
         <locationX>314</locationX>
         <locationY>695</locationY>
+        <connector>
+            <targetReference>burnedKcalUpdate</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -145,10 +173,32 @@
         <object>User</object>
     </recordUpdates>
     <recordUpdates>
+        <name>updateKcal</name>
+        <label>updateKcal</label>
+        <locationX>50</locationX>
+        <locationY>815</locationY>
+        <inputAssignments>
+            <field>Activity_points__c</field>
+            <value>
+                <elementReference>ForActivityGreater500kcal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Burned_calories__c</field>
+            <value>
+                <elementReference>burnedKcal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>UpdateUserActivityPoints</name>
         <label>UpdateUserActivityPoints</label>
         <locationX>50</locationX>
         <locationY>695</locationY>
+        <connector>
+            <targetReference>updateKcal</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>

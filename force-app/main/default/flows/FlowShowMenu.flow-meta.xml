@@ -482,7 +482,7 @@
         </fields>
         <fields>
             <name>displayMacros</name>
-            <fieldText>&lt;p&gt;Calories: {!totalCalories}&lt;/p&gt;&lt;p&gt;Proteins: {!totalProteins}&lt;/p&gt;&lt;p&gt;Fats: {!totalFats}&lt;/p&gt;&lt;p&gt;Carbohydrates: {!totalCarbohydrates}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Calories: {!totalCalories}/{!$User.Total_Calories__c}&lt;/p&gt;&lt;p&gt;Proteins: {!totalProteins}&lt;/p&gt;&lt;p&gt;Fats: {!totalFats}&lt;/p&gt;&lt;p&gt;Carbohydrates: {!totalCarbohydrates}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <nextOrFinishButtonLabel>Choose other date</nextOrFinishButtonLabel>

@@ -1,56 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>55.0</apiVersion>
+    <actionCalls>
+        <name>getActs</name>
+        <label>getActs</label>
+        <locationX>182</locationX>
+        <locationY>854</locationY>
+        <actionName>showActivityLog</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>showActs</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>activityLog</name>
+            <value>
+                <elementReference>actLogId</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>56.0</apiVersion>
     <assignments>
         <name>assignment</name>
         <label>assignment</label>
-        <locationX>264</locationX>
-        <locationY>638</locationY>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
         <assignmentItems>
-            <assignToReference>Get_activity_log.Id</assignToReference>
+            <assignToReference>actLogId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>createLog</elementReference>
+                <elementReference>getActivities.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Pick_activity</targetReference>
+            <targetReference>getActs</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_1_of_assignment</name>
+        <label>Copy 1 of assignment</label>
+        <locationX>314</locationX>
+        <locationY>638</locationY>
+        <assignmentItems>
+            <assignToReference>actLogId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>createActivityLog</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>getActs</targetReference>
         </connector>
     </assignments>
     <decisions>
-        <name>activityExist</name>
-        <label>activityExist</label>
-        <locationX>176</locationX>
+        <name>actLogExist</name>
+        <label>actLogExist</label>
+        <locationX>182</locationX>
         <locationY>398</locationY>
         <defaultConnector>
-            <targetReference>createLog</targetReference>
+            <targetReference>createActivityLog</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>ifNotExist</defaultConnectorLabel>
         <rules>
             <name>ifExist</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_activity_log.Id</leftValueReference>
+                <leftValueReference>getActivities.Id</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Pick_activity</targetReference>
+                <targetReference>assignment</targetReference>
             </connector>
             <label>ifExist</label>
         </rules>
     </decisions>
-    <dynamicChoiceSets>
-        <name>Activities</name>
-        <dataType>String</dataType>
-        <displayField>Name</displayField>
-        <object>Activity__c</object>
-        <valueField>Id</valueField>
-    </dynamicChoiceSets>
-    <interviewLabel>Add activity {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Add activity</label>
+    <interviewLabel>Show activities {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Show activities</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -71,38 +99,12 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <name>Create_activity_log_records</name>
-        <label>Create activity log records</label>
-        <locationX>176</locationX>
-        <locationY>974</locationY>
-        <inputAssignments>
-            <field>Activity_Log__c</field>
-            <value>
-                <elementReference>Get_activity_log.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Activity__c</field>
-            <value>
-                <elementReference>Mark_activity</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Time__c</field>
-            <value>
-                <elementReference>Time</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Activity_log_has_activity__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordCreates>
-    <recordCreates>
-        <name>createLog</name>
-        <label>createLog</label>
-        <locationX>264</locationX>
+        <name>createActivityLog</name>
+        <label>createActivityLog</label>
+        <locationX>314</locationX>
         <locationY>518</locationY>
         <connector>
-            <targetReference>assignment</targetReference>
+            <targetReference>Copy_1_of_assignment</targetReference>
         </connector>
         <inputAssignments>
             <field>Date__c</field>
@@ -120,13 +122,13 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>Get_activity_log</name>
-        <label>Get activity log</label>
-        <locationX>176</locationX>
+        <name>getActivities</name>
+        <label>getActivities</label>
+        <locationX>182</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>activityExist</targetReference>
+            <targetReference>actLogExist</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -148,15 +150,15 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
-        <name>Add_activity</name>
-        <label>Add activity</label>
-        <locationX>176</locationX>
+        <name>activities</name>
+        <label>activities</label>
+        <locationX>182</locationX>
         <locationY>158</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Get_activity_log</targetReference>
+            <targetReference>getActivities</targetReference>
         </connector>
         <fields>
             <name>Pick_date</name>
@@ -173,42 +175,44 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Pick_activity</name>
-        <label>Pick activity</label>
-        <locationX>176</locationX>
-        <locationY>854</locationY>
-        <allowBack>true</allowBack>
+        <name>showActs</name>
+        <label>showActs</label>
+        <locationX>182</locationX>
+        <locationY>974</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
-        <connector>
-            <targetReference>Create_activity_log_records</targetReference>
-        </connector>
         <fields>
-            <name>Mark_activity</name>
-            <choiceReferences>Activities</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Mark activity</fieldText>
-            <fieldType>RadioButtons</fieldType>
+            <name>acts</name>
+            <extensionName>c:showActivities</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>activites</name>
+                <value>
+                    <elementReference>getActs.activities</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
-        <fields>
-            <name>Time</name>
-            <dataType>Number</dataType>
-            <fieldText>Time</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <scale>0</scale>
-        </fields>
-        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
+        <nextOrFinishButtonLabel>Choose other date</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
+        <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Add_activity</targetReference>
+            <targetReference>activities</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>actLogId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>

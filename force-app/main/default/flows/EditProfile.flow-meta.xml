@@ -25,6 +25,50 @@
         <picklistField>PAL__c</picklistField>
         <picklistObject>User</picklistObject>
     </dynamicChoiceSets>
+    <formulas>
+        <name>BMR</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!userData.PAL__c})  = &apos;Lying in bed&apos;, 1.2*{!PPM},
+ IF(TEXT({!userData.PAL__c})  = &apos;Low physical activity&apos;, 1.4*{!PPM},
+IF(TEXT({!userData.PAL__c})  = &apos;Moderate physical activity&apos;, 1.6*{!PPM},
+IF(TEXT({!userData.PAL__c})  = &apos;Regular exercise 2-3 times a week&apos;, 1.75*{!PPM},
+IF(TEXT({!userData.PAL__c})  = &apos;Daily exercises&apos;, 2.0*{!PPM}, 2.4*{!PPM}
+)
+)
+)
+)
+)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Kcal</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!userData.Goal__c})  = &apos;Rapid weight loss&apos;, {!BMR}+1000,
+IF(TEXT({!userData.Goal__c})  = &apos;Quick weight loss&apos;, {!BMR}+750,
+IF(TEXT({!userData.Goal__c})  = &apos;Moderate weight loss&apos;, {!BMR}+500,
+IF(TEXT({!userData.Goal__c})  = &apos;Slow weight loss&apos;, {!BMR}+250,
+IF(TEXT({!userData.Goal__c})  = &apos;Keeping weight&apos;, {!BMR},
+IF(TEXT({!userData.Goal__c})  = &apos;Slow weight gain&apos;, {!BMR}-250, 
+IF(TEXT({!userData.Goal__c})  = &apos;Moderate weight gain&apos;, {!BMR}-500,
+IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}-1000
+)
+)
+)
+)
+)
+)
+)
+)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>PPM</name>
+        <dataType>Number</dataType>
+        <expression>IF(TEXT({!userData.Gender__c}) = &apos;Male&apos;,
+ 66+(13.75*{!userData.Weight__c})+(5*{!userData.Height__c})-(6.8*{!userData.Age__c}),
+ 655+(9.56*{!userData.Weight__c})+(1.85*{!userData.Height__c})-(4.7*{!userData.Age__c}))</expression>
+        <scale>2</scale>
+    </formulas>
     <interviewLabel>EditProfile {!$Flow.CurrentDateTime}</interviewLabel>
     <label>EditProfile</label>
     <processMetadataValues>
@@ -87,12 +131,6 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Diet_period_in_weeks__c</field>
-            <value>
-                <elementReference>Diet_Period</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
             <field>Gender__c</field>
             <value>
                 <elementReference>Genders</elementReference>
@@ -114,12 +152,6 @@
             <field>PAL__c</field>
             <value>
                 <elementReference>pals</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Target_Weight__c</field>
-            <value>
-                <elementReference>Target_Weight</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -195,28 +227,6 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>1</scale>
-        </fields>
-        <fields>
-            <name>Target_Weight</name>
-            <dataType>Number</dataType>
-            <defaultValue>
-                <elementReference>userData.Target_Weight__c</elementReference>
-            </defaultValue>
-            <fieldText>Target Weight</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <scale>1</scale>
-        </fields>
-        <fields>
-            <name>Diet_Period</name>
-            <dataType>Number</dataType>
-            <defaultValue>
-                <elementReference>userData.Diet_period_in_weeks__c</elementReference>
-            </defaultValue>
-            <fieldText>Diet Period in weeks</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <scale>0</scale>
         </fields>
         <fields>
             <name>PAL</name>

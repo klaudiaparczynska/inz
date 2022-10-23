@@ -10,4 +10,10 @@ public with sharing class MenuTotals {
          this.fat = fat;
          this.carbohydrates = carbo;
      }
+
+     @AuraEnabled(cacheable=true)
+     public static Double getUserInfoToReports(){
+        List<User> user =  [SELECT Total_Calories__c from User where ID =: UserInfo.getUserId()];
+        return user[0].Total_Calories__c;
+     }
 }

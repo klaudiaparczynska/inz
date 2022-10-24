@@ -4,7 +4,7 @@
     <assignments>
         <name>addToList</name>
         <label>addToList</label>
-        <locationX>842</locationX>
+        <locationX>798</locationX>
         <locationY>1118</locationY>
         <assignmentItems>
             <assignToReference>mealTypes</assignToReference>
@@ -52,13 +52,13 @@
     <assignments>
         <name>Copy_1_of_mealTypeId</name>
         <label>Copy 1 of mealTypeId</label>
-        <locationX>754</locationX>
+        <locationX>710</locationX>
         <locationY>1574</locationY>
         <assignmentItems>
-            <assignToReference>mealType</assignToReference>
+            <assignToReference>GetMealType</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Copy_1_of_GetMealType.Id</elementReference>
+                <elementReference>Copy_1_of_GetMealType</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -68,7 +68,7 @@
     <assignments>
         <name>getName</name>
         <label>getName</label>
-        <locationX>842</locationX>
+        <locationX>798</locationX>
         <locationY>998</locationY>
         <assignmentItems>
             <assignToReference>singleMealType.Name</assignToReference>
@@ -98,25 +98,9 @@
         </connector>
     </assignments>
     <assignments>
-        <name>mealTypeId</name>
-        <label>mealTypeId</label>
-        <locationX>402</locationX>
-        <locationY>638</locationY>
-        <assignmentItems>
-            <assignToReference>mealType</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>GetMealType.Id</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>ProductOrDish</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
         <name>singleMeal</name>
         <label>singleMeal</label>
-        <locationX>842</locationX>
+        <locationX>798</locationX>
         <locationY>878</locationY>
         <assignmentItems>
             <assignToReference>singleMealType.Date__c</assignToReference>
@@ -203,7 +187,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>mealTypeId</targetReference>
+                <targetReference>ProductOrDish</targetReference>
             </connector>
             <label>ifExist</label>
         </rules>
@@ -312,7 +296,7 @@
     <loops>
         <name>loopMeals</name>
         <label>loopMeals</label>
-        <locationX>754</locationX>
+        <locationX>710</locationX>
         <locationY>758</locationY>
         <collectionReference>getMeals</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -362,7 +346,7 @@
         <inputAssignments>
             <field>Meal_Type__c</field>
             <value>
-                <elementReference>mealType</elementReference>
+                <elementReference>GetMealType.Id</elementReference>
             </value>
         </inputAssignments>
         <object>Meal_type_has_dish__c</object>
@@ -371,7 +355,7 @@
     <recordCreates>
         <name>createMealTypes</name>
         <label>createMealTypes</label>
-        <locationX>754</locationX>
+        <locationX>710</locationX>
         <locationY>1334</locationY>
         <connector>
             <targetReference>Copy_1_of_GetMealType</targetReference>
@@ -392,7 +376,7 @@
         <inputAssignments>
             <field>Meal_Type__c</field>
             <value>
-                <elementReference>mealType</elementReference>
+                <elementReference>GetMealType.Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -407,7 +391,7 @@
     <recordLookups>
         <name>Copy_1_of_GetMealType</name>
         <label>Copy 1 of GetMealType</label>
-        <locationX>754</locationX>
+        <locationX>710</locationX>
         <locationY>1454</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -442,7 +426,7 @@
     <recordLookups>
         <name>getMeals</name>
         <label>getMeals</label>
-        <locationX>754</locationX>
+        <locationX>710</locationX>
         <locationY>638</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>

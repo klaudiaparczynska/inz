@@ -84,7 +84,7 @@
         <inputAssignments>
             <field>Activity__c</field>
             <value>
-                <elementReference>Mark_activity</elementReference>
+                <elementReference>PickActivity.recordId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -184,12 +184,36 @@
             <targetReference>Create_activity_log_records</targetReference>
         </connector>
         <fields>
-            <name>Mark_activity</name>
-            <choiceReferences>Activities</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Mark activity</fieldText>
-            <fieldType>RadioButtons</fieldType>
+            <name>PickActivity</name>
+            <extensionName>flowruntime:lookup</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>fieldApiName</name>
+                <value>
+                    <stringValue>Activity__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Pick activity</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>Activity_log_has_activity__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
             <name>Time</name>

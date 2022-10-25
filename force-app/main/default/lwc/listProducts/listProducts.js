@@ -1,5 +1,13 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import {refreshApex} from '@salesforce/apex';
+import deleteSelectedMealType from '@salesforce/apex/listProductController.deleteSelectedMealType';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+
+
+const actions = [
+    { label: 'Delete', name: 'delete' },
+];
 
 const productDetails= [
     {
@@ -14,6 +22,10 @@ const productDetails= [
     {label: 'Protein', fieldName: 'Protein'},
     {label: 'Fat', fieldName: 'Fat'},
     {label: 'Carbohydrates', fieldName: 'Carbohydrates'},
+    {
+        type: 'action',
+        typeAttributes: { rowActions: actions },
+    },
 ];
 
 
@@ -22,8 +34,10 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
     @api dishes;
     @api mealName;
     @track markers;
+    @track error;
     columns=productDetails;
     productsAndDishes;
+
 
     connectedCallback(){
         this.showProductsAndDishes();
@@ -40,7 +54,7 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 });
 
                 helper.push({
-                    Id: this.products[i].id,
+                    Id: mealTypeHasProductId[0],
                     Name: this.products[i].name,
                     Calories:  this.products[i].calories,
                     Protein: this.products[i].protein,
@@ -60,7 +74,7 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 });
 
                 helper.push({
-                    Id: this.dishes[i].dishId,
+                    Id: mealTypeHasDishId[0],
                     Name: this.dishes[i].name,
                     Calories:  this.dishes[i].calories,
                     Protein: this.dishes[i].protein,
@@ -71,5 +85,38 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
             }  
         }
         this.productsAndDishes = helper;
-    }   
+    } 
+    
+    handleRowAction(event) {
+        const actionName = event.detail.action.name;
+        const row = event.detail.row;
+        switch (actionName) {
+            case 'delete':
+                console.log('ID:' + row.Id);
+                this.handleDeleteRow(row.Id);
+                break;
+            default:
+        }
+    }
+
+    handleDeleteRow(recordIdToDelete) {
+        this.showLoadingSpinner = true;
+        deleteSelectedMealType({recordIdToDelete:recordIdToDelete})
+        .then(result =>{
+            this.showLoadingSpinner = false;
+            const evt = new ShowToastEvent({
+                title: 'Success Message',
+                message: 'Record deleted successfully ',
+                variant: 'success',
+                mode:'dismissible'
+            });
+            this.dispatchEvent(evt);
+            location.reload();
+            return false;
+        } )
+        .catch(error => {
+            this.error = error;
+        });
+
+    }
 }

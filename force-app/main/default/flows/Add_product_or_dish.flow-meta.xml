@@ -90,7 +90,7 @@
             <assignToReference>FinalGrammage</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Grammage</elementReference>
+                <elementReference>TypeGrammage</elementReference>
             </value>
         </assignmentItems>
         <connector>

@@ -222,6 +222,10 @@
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Selected time: {!Time} is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Time} &gt; 0</formulaExpression>
+            </validationRule>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>

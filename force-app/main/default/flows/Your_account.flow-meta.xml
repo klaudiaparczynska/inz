@@ -33,15 +33,16 @@
         <label>Informations</label>
         <locationX>176</locationX>
         <locationY>158</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <fields>
             <name>ActivityPoints</name>
-            <fieldText>&lt;p&gt;Hello {!$User.FirstName} {!$User.LastName}!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);&quot;&gt;Activity points: &lt;/span&gt;{!$User.Activity_points__c}&lt;/p&gt;&lt;p&gt;Special points: {!$User.Special_points__c}&lt;/p&gt;&lt;p&gt;Your weight: {!$User.Weight__c}&lt;/p&gt;&lt;p&gt;Target weight: {!$User.Target_Weight__c}&lt;/p&gt;&lt;p&gt;BMI: {!BMI}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Hello {!$User.FirstName} {!$User.LastName}!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;Activity points: &lt;/span&gt;{!$User.Activity_points__c}&lt;/p&gt;&lt;p&gt;Special points: {!$User.Special_points__c}&lt;/p&gt;&lt;p&gt;Your weight: {!$User.Weight__c}&lt;/p&gt;&lt;p&gt;BMI: {!BMI}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
-        <showFooter>true</showFooter>
+        <nextOrFinishButtonLabel>OK</nextOrFinishButtonLabel>
+        <showFooter>false</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <start>

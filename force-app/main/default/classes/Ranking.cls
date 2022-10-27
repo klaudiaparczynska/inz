@@ -8,5 +8,6 @@ public with sharing class Ranking {
         this.position = pos;
         this.points = points;
         this.name = name;
+        
     }
 }

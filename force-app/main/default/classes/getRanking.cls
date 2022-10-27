@@ -2,6 +2,7 @@ global with sharing class getRanking {
     public class FlowInput{
         @InvocableVariable public List<Ranking_has_user__c> rankingHasUser;
     }
+    
     public static List<Ranking> getRanking(Set<Id> ids){
         List<Ranking_has_user__c> rankings = [SELECT Position__c, Activity_points__c, User__r.Name FROM Ranking_has_user__c WHERE Id IN: ids ORDER BY Position__c ASC];
         List<Ranking> finalRanking = new List<Ranking>();

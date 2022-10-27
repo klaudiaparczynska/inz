@@ -11,4 +11,5 @@
             <property name="rankings" type="apex://Ranking[]" label="Current ranking" />
         </targetConfig>
     </targetConfigs>
+    
 </LightningComponentBundle>

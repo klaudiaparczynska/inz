@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <actionCalls>
-        <name>getRank</name>
-        <label>getRank</label>
-        <locationX>176</locationX>
-        <locationY>398</locationY>
-        <actionName>getRanking</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>printRanking</targetReference>
-        </connector>
-        <flowTransactionModel>Automatic</flowTransactionModel>
-        <inputParameters>
-            <name>rankingHasUser</name>
-            <value>
-                <elementReference>getRankingHasUser</elementReference>
-            </value>
-        </inputParameters>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </actionCalls>
     <apiVersion>56.0</apiVersion>
-    <interviewLabel>Show ranking {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Show ranking</label>
+    <formulas>
+        <name>position</name>
+        <dataType>Number</dataType>
+        <expression>{!getRankingHasUser.Position__c}+1</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Assignment new user to ranking {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Assignment new user to ranking</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -40,12 +27,38 @@
             <stringValue>LightningFlowBuilder</stringValue>
         </value>
     </processMetadataValues>
-    <processType>Flow</processType>
-    <recordLookups>
-        <name>getRanking</name>
-        <label>getRanking</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>createRankingHasUser</name>
+        <label>createRankingHasUser</label>
         <locationX>176</locationX>
-        <locationY>158</locationY>
+        <locationY>575</locationY>
+        <inputAssignments>
+            <field>Position__c</field>
+            <value>
+                <elementReference>position</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Ranking__c</field>
+            <value>
+                <elementReference>getCurrentRanking.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>User__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Ranking_has_user__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>getCurrentRanking</name>
+        <label>getCurrentRanking</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>getRankingHasUser</targetReference>
@@ -73,56 +86,34 @@
         <name>getRankingHasUser</name>
         <label>getRankingHasUser</label>
         <locationX>176</locationX>
-        <locationY>278</locationY>
+        <locationY>455</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>getRank</targetReference>
+            <targetReference>createRankingHasUser</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Ranking__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>getRanking.Id</elementReference>
+                <elementReference>getCurrentRanking.Id</elementReference>
             </value>
         </filters>
-        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Ranking_has_user__c</object>
-        <sortField>Activity_points__c</sortField>
+        <sortField>Position__c</sortField>
         <sortOrder>Desc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
-    <screens>
-        <name>printRanking</name>
-        <label>printRanking</label>
-        <locationX>176</locationX>
-        <locationY>518</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>showRank</name>
-            <extensionName>c:showRanking</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>rankings</name>
-                <value>
-                    <elementReference>getRank.rankings</elementReference>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <showFooter>false</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>getRanking</targetReference>
+            <targetReference>getCurrentRanking</targetReference>
         </connector>
+        <object>User</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
 </Flow>

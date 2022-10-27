@@ -27,9 +27,14 @@ export default class ShowActivities extends NavigationMixin(LightningElement) {
 
     showActivity(){
         let helper = [];
+        let totalCalories = 0;
+        let totalTime = 0;
+        let totalPoints = 0;
         if (this.activites) {
             for(let i = 0; i < this.activites.length; i++) {
-
+                totalCalories += this.activites[i].burnedCalories;
+                totalTime += this.activites[i].activityTime;
+                totalPoints += this.activites[i].activityPoints;
                 helper.push({
                     Id: this.activites[i].id,
                     Name: this.activites[i].name,
@@ -39,7 +44,16 @@ export default class ShowActivities extends NavigationMixin(LightningElement) {
                     LinkName : '/' + this.activites[i].id
                 })
             }
+            helper.push({
+                Id: '',
+                Name: 'Total',
+                Burned:  totalCalories,
+                Time: totalTime,
+                Points: totalPoints,
+                LinkName : '/'
+            })
         }
+        console.log(helper);
         this.activity = helper;
     }
 }

@@ -349,12 +349,33 @@
         <connector>
             <targetReference>prize</targetReference>
         </connector>
-        <filterLogic>and</filterLogic>
+        <filterLogic>1 AND (2 OR 3 OR 4)</filterLogic>
         <filters>
             <field>Ranking__c</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>getRank.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Position__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Position__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <numberValue>2.0</numberValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Position__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <numberValue>3.0</numberValue>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -413,7 +434,7 @@
         </schedule>
         <triggerType>Scheduled</triggerType>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>listUsers</name>
         <dataType>SObject</dataType>

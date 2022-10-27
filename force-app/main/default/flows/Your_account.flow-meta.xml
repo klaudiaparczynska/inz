@@ -28,17 +28,73 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>getPosition</name>
+        <label>getPosition</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Info_about_you</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Ranking__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getRank.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>User__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Ranking_has_user__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getRank</name>
+        <label>getRank</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getPosition</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Start_Date__c</field>
+            <operator>LessThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Ranking__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>Info_about_you</name>
         <label>Informations</label>
         <locationX>176</locationX>
-        <locationY>158</locationY>
+        <locationY>398</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <fields>
             <name>ActivityPoints</name>
-            <fieldText>&lt;p&gt;Hello {!$User.FirstName} {!$User.LastName}!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;Activity points: &lt;/span&gt;{!$User.Activity_points__c}&lt;/p&gt;&lt;p&gt;Special points: {!$User.Special_points__c}&lt;/p&gt;&lt;p&gt;Your weight: {!$User.Weight__c}&lt;/p&gt;&lt;p&gt;BMI: {!BMI}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Hello {!$User.FirstName} {!$User.LastName}!&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;Activity points: &lt;/span&gt;{!$User.Activity_points__c}&lt;/p&gt;&lt;p&gt;Special points: {!$User.Special_points__c}&lt;/p&gt;&lt;p&gt;Your weight: {!$User.Weight__c}&lt;/p&gt;&lt;p&gt;BMI: {!BMI}&lt;/p&gt;&lt;p&gt;Your position in ranking: {!getPosition.Position__c}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <nextOrFinishButtonLabel>OK</nextOrFinishButtonLabel>
@@ -49,7 +105,7 @@
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Info_about_you</targetReference>
+            <targetReference>getRank</targetReference>
         </connector>
     </start>
     <status>Active</status>

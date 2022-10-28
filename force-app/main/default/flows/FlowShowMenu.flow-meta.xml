@@ -523,7 +523,7 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>reportsBasedOnMacro</name>
+            <name>MacrosReport</name>
             <extensionName>c:totalReports</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
@@ -608,4 +608,5 @@
             <numberValue>0.0</numberValue>
         </value>
     </variables>
+    
 </Flow>

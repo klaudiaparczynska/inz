@@ -17,6 +17,18 @@ IF(TEXT({!$Record.PAL__c})  = &apos;Daily exercises&apos;, 2.0*{!PPM}, 2.4*{!PPM
         <scale>2</scale>
     </formulas>
     <formulas>
+        <name>Carbs</name>
+        <dataType>Number</dataType>
+        <expression>({!Kcal}*0.5)/4</expression>
+        <scale>1</scale>
+    </formulas>
+    <formulas>
+        <name>Fat</name>
+        <dataType>Number</dataType>
+        <expression>({!Kcal}*0.2)/9</expression>
+        <scale>1</scale>
+    </formulas>
+    <formulas>
         <name>Kcal</name>
         <dataType>Number</dataType>
         <expression>IF(TEXT({!$Record.Goal__c})  = &apos;Rapid weight loss&apos;, {!BMR}+1000,
@@ -44,6 +56,12 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
  66+(13.75*{!$Record.Weight__c})+(5*{!$Record.Height__c})-(6.8*{!$Record.Age__c}),
  655+(9.56*{!$Record.Weight__c})+(1.85*{!$Record.Height__c})-(4.7*{!$Record.Age__c}))</expression>
         <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>Protein</name>
+        <dataType>Number</dataType>
+        <expression>({!Kcal}*0.3)/4</expression>
+        <scale>1</scale>
     </formulas>
     <interviewLabel>SetTotalMacros {!$Flow.CurrentDateTime}</interviewLabel>
     <label>SetTotalMacros</label>
@@ -80,19 +98,19 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
         <inputAssignments>
             <field>Total_Carbohydrates__c</field>
             <value>
-                <numberValue>0.0</numberValue>
+                <elementReference>Carbs</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Total_Fat__c</field>
             <value>
-                <numberValue>0.0</numberValue>
+                <elementReference>Fat</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Total_Proteins__c</field>
             <value>
-                <numberValue>0.0</numberValue>
+                <elementReference>Protein</elementReference>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>

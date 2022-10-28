@@ -158,6 +158,10 @@
             <fieldText>Type dish name</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Too short dish name!&lt;/p&gt;</errorMessage>
+                <formulaExpression>LEN({!Type_dish_name}) &gt; 2</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Quantity_products</name>
@@ -239,6 +243,10 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Selected grammage: {!Grammage} is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Grammage} &gt; 0 &amp;&amp; {!Grammage} &lt; 10000</formulaExpression>
+            </validationRule>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>

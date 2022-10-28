@@ -523,7 +523,7 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>reportsBasedOnMacro</name>
+            <name>MacrosReport</name>
             <extensionName>c:totalReports</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>

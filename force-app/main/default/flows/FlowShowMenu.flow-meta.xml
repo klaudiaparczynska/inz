@@ -19,6 +19,43 @@
         </inputParameters>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
+    <actionCalls>
+        <name>getTotalMacros</name>
+        <label>getTotalMacros</label>
+        <locationX>176</locationX>
+        <locationY>2126</locationY>
+        <actionName>getTotalsFromMenu</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Print_Menus</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>totalCalories</name>
+            <value>
+                <elementReference>totalCalories</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>totalCarbohydrates</name>
+            <value>
+                <elementReference>totalCarbohydrates</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>totalFat</name>
+            <value>
+                <elementReference>totalFats</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>totalProtein</name>
+            <value>
+                <elementReference>totalProteins</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>55.0</apiVersion>
     <assignments>
         <name>assignment</name>
@@ -192,7 +229,7 @@
             <targetReference>Macros</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Print_Menus</targetReference>
+            <targetReference>getTotalMacros</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -321,7 +358,7 @@
         <name>Print_Menus</name>
         <label>Print Menus</label>
         <locationX>176</locationX>
-        <locationY>2126</locationY>
+        <locationY>2246</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -482,8 +519,22 @@
         </fields>
         <fields>
             <name>displayMacros</name>
-            <fieldText>&lt;p&gt;Calories: {!totalCalories}/{!$User.Total_Calories__c}&lt;/p&gt;&lt;p&gt;Proteins: {!totalProteins}&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;/{!$User.Total_Proteins__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Fats: {!totalFats}/{!$User.Total_Fat__c}&lt;/p&gt;&lt;p&gt;Carbohydrates: {!totalCarbohydrates}/{!$User.Total_Carbohydrates__c}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Calories: {!totalCalories}/{!$User.Total_Calories__c}&lt;/p&gt;&lt;p&gt;Proteins: {!totalProteins}&lt;/p&gt;&lt;p&gt;Fats: {!totalFats}&lt;/p&gt;&lt;p&gt;Carbohydrates: {!totalCarbohydrates}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>reportsBasedOnMacro</name>
+            <extensionName>c:totalReports</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>totals</name>
+                <value>
+                    <elementReference>getTotalMacros.totals</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <nextOrFinishButtonLabel>Choose other date</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>

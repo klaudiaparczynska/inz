@@ -6,7 +6,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getUserInfoToReports from '@salesforce/apex/MenuTotals.getUserInfoToReports';
 
 export default class TotalReports extends LightningElement {
-    @api totals;
+    summary;
     infos;
 
     connectedCallback() {
@@ -28,6 +28,14 @@ export default class TotalReports extends LightningElement {
            // this.updateChart(this.infos - this.totals[0].calories, "To consume"); 
         }
 
+    }
+    @api
+    get totals(){
+      return this.summary;
+    } 
+    set totals(value){
+      this.summary = value;
+      //tu chart
     }
 /*
     chart;

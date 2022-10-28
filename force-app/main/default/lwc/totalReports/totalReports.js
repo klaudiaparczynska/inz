@@ -8,7 +8,6 @@ import getUserInfoToReports from '@salesforce/apex/MenuTotals.getUserInfoToRepor
 export default class TotalReports extends LightningElement {
   summary;  
   error;
-  //@api totals;
   @api get totals(){
     return this.summary;
   }
@@ -28,13 +27,9 @@ export default class TotalReports extends LightningElement {
             this.error = undefined;
 
             let consumedKcal = JSON.parse(this.summary[0].calories);
-            console.log(consumedKcal);
-            console.log(this.infos);
             this.updateChart(consumedKcal, "Consumed", consumedKcal);
             this.updateChart((this.infos - consumedKcal).toFixed(2), "To consume", (this.infos - consumedKcal).toFixed(2));
-            
             this.renderedCallback();
-            console.log(this.config.backgroundColor);
         })
         .catch(error => {
             this.error = error;
@@ -45,6 +40,7 @@ export default class TotalReports extends LightningElement {
     }
 
     
+  
     chart;
     chartjsInitialized = false;
     config={
@@ -96,6 +92,7 @@ export default class TotalReports extends LightningElement {
         );
       });
     }
+    
     updateChart(count,label, value)
     {
       this.chart.data.labels.push(label);

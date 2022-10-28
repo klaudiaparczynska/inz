@@ -194,6 +194,10 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Selected age:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Age}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;is not correct!&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Age} &gt; 0 &amp;&amp; {!Age} &lt; 130</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Goal</name>
@@ -212,10 +216,14 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             <defaultValue>
                 <elementReference>userData.Height__c</elementReference>
             </defaultValue>
-            <fieldText>Height</fieldText>
+            <fieldText>Height in cm</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Selected height: &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Height}&lt;/span&gt; is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Height} &gt; 0 &amp;&amp; {!Height}&lt; 250</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Weight</name>
@@ -223,10 +231,14 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             <defaultValue>
                 <elementReference>userData.Weight__c</elementReference>
             </defaultValue>
-            <fieldText>Weight</fieldText>
+            <fieldText>Weight in kg</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>1</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Selected weight:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Weight}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;is not correct!&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Weight} &gt; 0 &amp;&amp; {!Weight} &lt; 650</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>PAL</name>

@@ -1,12 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>addToList</name>
+        <label>addToList</label>
+        <locationX>798</locationX>
+        <locationY>1118</locationY>
+        <assignmentItems>
+            <assignToReference>mealTypes</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>singleMealType</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>loopMeals</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>assignmentSpoon</name>
+        <label>assignmentSpoon</label>
+        <locationX>314</locationX>
+        <locationY>2270</locationY>
+        <assignmentItems>
+            <assignToReference>FinalGrammage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TeaspoonOrSpoon</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CreateProduct</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>assignmentTeaSpoon</name>
+        <label>assignmentTeaSpoon</label>
+        <locationX>578</locationX>
+        <locationY>2270</locationY>
+        <assignmentItems>
+            <assignToReference>FinalGrammage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TeaspoonOrSpoon</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CreateProduct</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Copy_1_of_mealTypeId</name>
+        <label>Copy 1 of mealTypeId</label>
+        <locationX>710</locationX>
+        <locationY>1574</locationY>
+        <assignmentItems>
+            <assignToReference>GetMealType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Copy_1_of_GetMealType</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>ProductOrDish</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>getName</name>
+        <label>getName</label>
+        <locationX>798</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>singleMealType.Name</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>getMealTypeName</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>addToList</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Gramm</name>
+        <label>AssignmentGram</label>
+        <locationX>50</locationX>
+        <locationY>2270</locationY>
+        <assignmentItems>
+            <assignToReference>FinalGrammage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TypeGrammage</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>CreateProduct</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>singleMeal</name>
+        <label>singleMeal</label>
+        <locationX>798</locationX>
+        <locationY>878</locationY>
+        <assignmentItems>
+            <assignToReference>singleMealType.Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>PickDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleMealType.Descriptor__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>loopMeals.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>singleMealType.User__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>getName</targetReference>
+        </connector>
+    </assignments>
     <choices>
         <name>Dish</name>
         <choiceText>Dish</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Dish</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Gram</name>
+        <choiceText>Gram</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Gram</stringValue>
         </value>
     </choices>
     <choices>
@@ -17,11 +151,52 @@
             <stringValue>Product</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>Spoon</name>
+        <choiceText>Spoon</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Spoon</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Teaspoon</name>
+        <choiceText>Teaspoon</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Teaspoon</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <name>ifGetMealType</name>
+        <label>ifGetMealType</label>
+        <locationX>578</locationX>
+        <locationY>518</locationY>
+        <defaultConnector>
+            <targetReference>getMeals</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>ifNotExist</defaultConnectorLabel>
+        <rules>
+            <name>ifExist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>GetMealType.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>ProductOrDish</targetReference>
+            </connector>
+            <label>ifExist</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>ProductDish</name>
         <label>ProductDish</label>
-        <locationX>182</locationX>
-        <locationY>518</locationY>
+        <locationX>578</locationX>
+        <locationY>1910</locationY>
         <defaultConnector>
             <targetReference>PickDish</targetReference>
         </defaultConnector>
@@ -40,6 +215,46 @@
                 <targetReference>Products</targetReference>
             </connector>
             <label>ProductWay</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Type</name>
+        <label>Type</label>
+        <locationX>314</locationX>
+        <locationY>2150</locationY>
+        <defaultConnector>
+            <targetReference>assignmentTeaSpoon</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>ifTeaspoon</defaultConnectorLabel>
+        <rules>
+            <name>ifGram</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Choose_type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Gram</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Gramm</targetReference>
+            </connector>
+            <label>ifGram</label>
+        </rules>
+        <rules>
+            <name>ifSpoon</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Choose_type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Spoon</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>assignmentSpoon</targetReference>
+            </connector>
+            <label>ifSpoon</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -65,8 +280,33 @@
         <sortOrder>Asc</sortOrder>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
+    <formulas>
+        <name>getMealTypeName</name>
+        <dataType>String</dataType>
+        <expression>{!$User.FirstName}&amp;{!$User.LastName}&amp;{!$User.Username}&amp;TEXT({!singleMealType.Date__c})&amp;{!singleMealType.Descriptor__r.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>TeaspoonOrSpoon</name>
+        <dataType>Number</dataType>
+        <expression>IF({!Choose_type}=={!Spoon}, {!TypeGrammage}*15, {!TypeGrammage}*5)</expression>
+        <scale>0</scale>
+    </formulas>
     <interviewLabel>Add product or dish {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Add product or dish</label>
+    <loops>
+        <name>loopMeals</name>
+        <label>loopMeals</label>
+        <locationX>710</locationX>
+        <locationY>758</locationY>
+        <collectionReference>getMeals</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>singleMeal</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>createMealTypes</targetReference>
+        </noMoreValuesConnector>
+    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -89,8 +329,8 @@
     <recordCreates>
         <name>CreateDish</name>
         <label>CreateDish</label>
-        <locationX>314</locationX>
-        <locationY>878</locationY>
+        <locationX>842</locationX>
+        <locationY>2150</locationY>
         <inputAssignments>
             <field>Dish__c</field>
             <value>
@@ -106,21 +346,31 @@
         <inputAssignments>
             <field>Meal_Type__c</field>
             <value>
-                <elementReference>GetMealType_0.Id</elementReference>
+                <elementReference>GetMealType.Id</elementReference>
             </value>
         </inputAssignments>
         <object>Meal_type_has_dish__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>createMealTypes</name>
+        <label>createMealTypes</label>
+        <locationX>710</locationX>
+        <locationY>1334</locationY>
+        <connector>
+            <targetReference>Copy_1_of_GetMealType</targetReference>
+        </connector>
+        <inputReference>mealTypes</inputReference>
+    </recordCreates>
+    <recordCreates>
         <name>CreateProduct</name>
         <label>CreateProduct</label>
-        <locationX>50</locationX>
-        <locationY>878</locationY>
+        <locationX>314</locationX>
+        <locationY>2486</locationY>
         <inputAssignments>
             <field>Grammage__c</field>
             <value>
-                <elementReference>TypeGrammage</elementReference>
+                <elementReference>FinalGrammage</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -139,13 +389,13 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>GetMealType</name>
-        <label>GetMealType</label>
-        <locationX>50</locationX>
-        <locationY>758</locationY>
+        <name>Copy_1_of_GetMealType</name>
+        <label>Copy 1 of GetMealType</label>
+        <locationX>710</locationX>
+        <locationY>1454</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>CreateProduct</targetReference>
+            <targetReference>Copy_1_of_mealTypeId</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -166,7 +416,7 @@
             <field>Descriptor__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Meals</elementReference>
+                <elementReference>Pick_meal</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -174,13 +424,26 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>GetMealType_0</name>
-        <label>GetMealType</label>
-        <locationX>314</locationX>
-        <locationY>758</locationY>
+        <name>getMeals</name>
+        <label>getMeals</label>
+        <locationX>710</locationX>
+        <locationY>638</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>CreateDish</targetReference>
+            <targetReference>loopMeals</targetReference>
+        </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Descriptor__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>GetMealType</name>
+        <label>GetMealType</label>
+        <locationX>578</locationX>
+        <locationY>398</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ifGetMealType</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -201,7 +464,7 @@
             <field>Descriptor__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>Meals</elementReference>
+                <elementReference>Pick_meal</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -211,7 +474,7 @@
     <screens>
         <name>Date</name>
         <label>Date</label>
-        <locationX>182</locationX>
+        <locationX>578</locationX>
         <locationY>158</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
@@ -236,13 +499,13 @@
     <screens>
         <name>Meal</name>
         <label>Meal</label>
-        <locationX>182</locationX>
+        <locationX>578</locationX>
         <locationY>278</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>ProductOrDish</targetReference>
+            <targetReference>GetMealType</targetReference>
         </connector>
         <fields>
             <name>Pick_meal</name>
@@ -259,13 +522,13 @@
     <screens>
         <name>PickDish</name>
         <label>PickDish</label>
-        <locationX>314</locationX>
-        <locationY>638</locationY>
+        <locationX>842</locationX>
+        <locationY>2030</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>GetMealType_0</targetReference>
+            <targetReference>CreateDish</targetReference>
         </connector>
         <fields>
             <name>pickDishToMenu</name>
@@ -289,6 +552,12 @@
                     <stringValue>Meal_type_has_dish__c</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -300,6 +569,10 @@
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Selected grammage: {!Grammage} is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Grammage} &gt; 0 &amp;&amp; {!Grammage} &lt; 10000</formulaExpression>
+            </validationRule>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
@@ -308,8 +581,8 @@
     <screens>
         <name>ProductOrDish</name>
         <label>ProductOrDish</label>
-        <locationX>182</locationX>
-        <locationY>398</locationY>
+        <locationX>578</locationX>
+        <locationY>1790</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -332,13 +605,13 @@
     <screens>
         <name>Products</name>
         <label>Products</label>
-        <locationX>50</locationX>
-        <locationY>638</locationY>
+        <locationX>314</locationX>
+        <locationY>2030</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>GetMealType</targetReference>
+            <targetReference>Type</targetReference>
         </connector>
         <fields>
             <name>pickProduct</name>
@@ -362,6 +635,12 @@
                     <stringValue>Meal_type_has_product__c</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -369,21 +648,69 @@
         <fields>
             <name>TypeGrammage</name>
             <dataType>Number</dataType>
-            <fieldText>Type grammage</fieldText>
+            <fieldText>Type amount</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Selected amount: {!TypeGrammage} is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!TypeGrammage} &gt; 0 &amp;&amp; {!TypeGrammage} &lt; 10000</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Choose_type</name>
+            <choiceReferences>Gram</choiceReferences>
+            <choiceReferences>Spoon</choiceReferences>
+            <choiceReferences>Teaspoon</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Choose type</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
         </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>56</locationX>
+        <locationX>452</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Date</targetReference>
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>FinalGrammage</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>mealType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>mealTypes</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Meal_Type__c</objectType>
+    </variables>
+    <variables>
+        <name>singleMealType</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Meal_Type__c</objectType>
+    </variables>
 </Flow>

@@ -56,10 +56,10 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 helper.push({
                     Id: mealTypeHasProductId[0],
                     Name: this.products[i].name,
-                    Calories:  this.products[i].calories,
-                    Protein: this.products[i].protein,
-                    Fat: this.products[i].fat,
-                    Carbohydrates: this.products[i].carbohydrates,
+                    Calories:  Number(this.products[i].calories).toFixed(2),
+                    Protein: Number(this.products[i].protein).toFixed(2),
+                    Fat: Number(this.products[i].fat).toFixed(2),
+                    Carbohydrates: Number(this.products[i].carbohydrates).toFixed(2),
                     LinkName : '/' + mealTypeHasProductId[0]
                 })
             }
@@ -76,10 +76,10 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 helper.push({
                     Id: mealTypeHasDishId[0],
                     Name: this.dishes[i].name,
-                    Calories:  this.dishes[i].calories,
-                    Protein: this.dishes[i].protein,
-                    Fat: this.dishes[i].fat,
-                    Carbohydrates: this.dishes[i].carbohydrates,
+                    Calories:  Number(this.dishes[i].calories).toFixed(2),
+                    Protein: Number(this.dishes[i].protein).toFixed(2),
+                    Fat: Number(this.dishes[i].fat).toFixed(2),
+                    Carbohydrates: Number(this.dishes[i].carbohydrates).toFixed(2),
                     LinkName : '/' + mealTypeHasDishId[0]
                 })
             }  

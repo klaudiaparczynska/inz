@@ -5,10 +5,5 @@
         <sharedTo>AllInternalUsers</sharedTo>
         <sharedToType>Organization</sharedToType>
     </folderShares>
-    <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>kparc@creative-hawk-ws94vr.com</sharedTo>
-        <sharedToType>User</sharedToType>
-    </folderShares>
     <name>Profile Dashboard</name>
 </DashboardFolder>

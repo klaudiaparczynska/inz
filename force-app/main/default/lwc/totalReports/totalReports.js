@@ -6,30 +6,45 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getUserInfoToReports from '@salesforce/apex/MenuTotals.getUserInfoToReports';
 
 export default class TotalReports extends LightningElement {
-    @api totals;
+  summary;  
+  error;
+  //@api totals;
+  @api get totals(){
+    return this.summary;
+  }
+  set totals(value) {
+    this.summary = value;
+
+  }
     infos;
 
     connectedCallback() {
         console.log(this.totals); //zeżarte
+        this.summary = this.totals;
+        getUserInfoToReports({})
+        .then(result => {
+          console.log("result: " + result)
+            this.infos = result;
+            this.error = undefined;
 
-    }
-    @wire(getUserInfoToReports, {}) 
-    getDatas({error, data}){
-        if(error) {
-
-        }else {
-            this.infos = data; //dostępne dla użytkownika na podstawie masy etc
-            console.log('---------');
+            let consumedKcal = JSON.parse(this.summary[0].calories);
+            console.log(consumedKcal);
             console.log(this.infos);
-            console.log(this.totals);
-            this.totals.forEach(element => console.log(element));
-            this.totals.forEach(element => console.log(element.calories));
-           //this.updateChart(this.totals[0].calories, "Consumed");
-           // this.updateChart(this.infos - this.totals[0].calories, "To consume"); 
-        }
+            this.updateChart(consumedKcal, "Consumed", consumedKcal);
+            this.updateChart((this.infos - consumedKcal).toFixed(2), "To consume", (this.infos - consumedKcal).toFixed(2));
+            
+            this.renderedCallback();
+            console.log(this.config.backgroundColor);
+        })
+        .catch(error => {
+            this.error = error;
+            this.infos = undefined;
+        })
+  
 
     }
-/*
+
+    
     chart;
     chartjsInitialized = false;
     config={
@@ -39,11 +54,9 @@ export default class TotalReports extends LightningElement {
         data: [],
         backgroundColor :[
             'rgb(41, 52, 98)',
-            'rgb(242, 76, 76)',
-            'rgb(236, 155, 59)',
-            'rgb(247, 215, 22)',
+            'rgb(242, 76, 76)'
         ],
-        label:'Votes'
+        label:'Calories'
       }],
       labels:[]
       },
@@ -83,15 +96,20 @@ export default class TotalReports extends LightningElement {
         );
       });
     }
-    updateChart(count,label)
+    updateChart(count,label, value)
     {
       this.chart.data.labels.push(label);
       this.chart.data.datasets.forEach((dataset) => {
         dataset.data.push(count);
       });
+      if(value > 0) {
+        this.config.data.datasets[0].backgroundColor[1] = 'rgb(2, 214, 45)';
+      } else {
+        this.config.data.datasets[0].backgroundColor[1] = 'rgb(242, 76, 76)';
+      }
       this.chart.update();
     }
-    */
+    
 
 }
 

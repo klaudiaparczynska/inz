@@ -149,16 +149,16 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Ranking</label>
+    <label>Ranking has user</label>
     <nameField>
-        <label>Ranking Name</label>
+        <label>Ranking has user Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Rankings</pluralLabel>
+    <pluralLabel>Ranking has users</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

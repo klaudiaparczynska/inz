@@ -197,6 +197,7 @@
             <label>ifExist</label>
         </rules>
     </decisions>
+    <environments>Default</environments>
     <formulas>
         <name>getNameMealType</name>
         <dataType>String</dataType>
@@ -519,7 +520,7 @@
         </fields>
         <fields>
             <name>displayMacros</name>
-            <fieldText>&lt;p&gt;Calories: {!totalCalories}/{!$User.Total_Calories__c}&lt;/p&gt;&lt;p&gt;Proteins: {!totalProteins}&lt;/p&gt;&lt;p&gt;Fats: {!totalFats}&lt;/p&gt;&lt;p&gt;Carbohydrates: {!totalCarbohydrates}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Calories: &lt;/strong&gt;{!totalCalories} kcal/{!$User.Total_Calories__c} kcal&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Proteins: &lt;/strong&gt;{!totalProteins} g/{!$User.Total_Proteins__c} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Fats:&lt;/strong&gt; {!totalFats} g/{!$User.Total_Fat__c} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Carbohydrates: &lt;/strong&gt;{!totalCarbohydrates} g/{!$User.Total_Carbohydrates__c} g&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -608,5 +609,4 @@
             <numberValue>0.0</numberValue>
         </value>
     </variables>
-    
 </Flow>

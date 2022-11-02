@@ -17,7 +17,7 @@
                 <chartSummary>
                     <aggregate>Sum</aggregate>
                     <axisBinding>y</axisBinding>
-                    <column>Meal_Type__c$Total_carbohydrates__c</column>
+                    <column>Meal_Type__c$Total_calories__c</column>
                 </chartSummary>
                 <componentType>Line</componentType>
                 <decimalPrecision>-1</decimalPrecision>
@@ -33,13 +33,12 @@
                         <sortOrder>a</sortOrder>
                     </groupingSorts>
                 </groupingSortProperties>
-                <header>Consumed Calories</header>
+                <header>Total Calories</header>
                 <legendPosition>Bottom</legendPosition>
                 <report>unfiled$public/Total_Calories_sd3</report>
                 <showPercentage>false</showPercentage>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
-                <title>Calories consumed over time</title>
                 <useReportChart>false</useReportChart>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -159,7 +158,7 @@
         <numberOfColumns>12</numberOfColumns>
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
-    <dashboardType>SpecifiedUser</dashboardType>
+    <dashboardType>LoggedInUser</dashboardType>
     <isGridLayout>true</isGridLayout>
     <runningUser>tolsz@softserveinc.com</runningUser>
     <textColor>#000000</textColor>

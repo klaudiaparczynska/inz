@@ -52,10 +52,13 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <label>ToBe Healthy</label>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>ToBeHealthy</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
     <tabs>Profile</tabs>
+    <tabs>Ranking</tabs>
+    <tabs>Statistics</tabs>
     <tabs>New_Product__c</tabs>
     <tabs>Dish__c</tabs>
     <tabs>Dish_has_product__c</tabs>

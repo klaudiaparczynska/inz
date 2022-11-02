@@ -11,12 +11,20 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>Start_Date__c</field>
+                <behavior>Edit</behavior>
+                <field>User__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>End_Date__c</field>
+                <behavior>Edit</behavior>
+                <field>Activity_points__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Position__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Ranking__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -55,10 +63,6 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Ranking_has_user__c.Ranking__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

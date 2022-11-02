@@ -25,7 +25,7 @@
         <chartSummaries>
             <aggregate>Sum</aggregate>
             <axisBinding>y</axisBinding>
-            <column>Meal_Type__c$Total_carbohydrates__c</column>
+            <column>Meal_Type__c$Total_calories__c</column>
         </chartSummaries>
         <chartType>Line</chartType>
         <enableHoverLabels>false</enableHoverLabels>
@@ -45,7 +45,7 @@
     </chart>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Meal_Type__c$Total_carbohydrates__c</field>
+        <field>Meal_Type__c$Total_calories__c</field>
     </columns>
     <format>Matrix</format>
     <groupingsAcross>
@@ -60,7 +60,7 @@
     <name>Total Calories</name>
     <params>
         <name>co</name>
-        <value>1</value>
+        <value>0</value>
     </params>
     <reportType>MealTypesReports__c</reportType>
     <scope>user</scope>

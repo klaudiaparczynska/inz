@@ -1,8 +1,20 @@
 <template>
-    <lightning-card title='Calories'>
-      <div>
-        
+  <div class="slds-size_1-of-5">
+    <lightning-card>
+      <div class="slds-grid">
+        <lightning-card title="Calories" class="slds-size_small">
         <canvas class="donut" lwc:dom="manual"></canvas>
+      </lightning-card>
+      <lightning-card title="Fats" class="slds-size_small">
+        <canvas class="donut2" lwc:dom="manual"></canvas>
+      </lightning-card>
+      <lightning-card title="Proteins" class="slds-size_small">
+        <canvas class="donut3" lwc:dom="manual"></canvas>
+      </lightning-card>
+      <lightning-card title="Carbohydrates" class="slds-size_small">
+        <canvas class="donut4" lwc:dom="manual"></canvas>
+      </lightning-card>
       </div>
     </lightning-card>
+  </div>
 </template>

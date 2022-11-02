@@ -26,6 +26,7 @@
             <label>ifSpecialPoints</label>
         </rules>
     </decisions>
+    <environments>Default</environments>
     <interviewLabel>Buy vip {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Buy vip</label>
     <processMetadataValues>
@@ -47,11 +48,55 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <name>permissionSetAssignment</name>
+        <label>permissionSetAssignment</label>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
+        <inputAssignments>
+            <field>AssigneeId</field>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>PermissionSetId</field>
+            <value>
+                <elementReference>getPermissionSet.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>getPermissionSet</name>
+        <label>getPermissionSet</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>permissionSetAssignment</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>VIP</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>PermissionSet</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <recordUpdates>
         <name>updateStatus</name>
         <label>updateStatus</label>
         <locationX>50</locationX>
         <locationY>398</locationY>
+        <connector>
+            <targetReference>getPermissionSet</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -97,7 +142,7 @@
         </connector>
         <fields>
             <name>BuyVip</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;VIP - 1000 SPECIAL POINTS!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Benefits:&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;VIP - 1000 SPECIAL POINTS!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Benefits:&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;VIP gives you unlimited access to statistics in which you have described individual macronutrients on a readable color chart&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <nextOrFinishButtonLabel>BUY</nextOrFinishButtonLabel>

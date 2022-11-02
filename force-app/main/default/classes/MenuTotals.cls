@@ -12,8 +12,9 @@ public with sharing class MenuTotals {
      }
 
      @AuraEnabled(cacheable=true)
-     public static Double getUserInfoToReports(){
-        List<User> user =  [SELECT Total_Calories__c from User where ID =: UserInfo.getUserId()];
-        return user[0].Total_Calories__c;
+     public static List<Double> getUserInfoToReports(){
+        List<User> user =  [SELECT Total_Calories__c, Total_fat__c, Total_proteins__c, Total_carbohydrates__c from User where ID =: UserInfo.getUserId()];
+        List<Double> listMacros = new List<Double>{user[0].Total_Calories__c, user[0].Total_fat__c, user[0].Total_proteins__c, user[0].Total_carbohydrates__c};
+        return listMacros;
      }
 }

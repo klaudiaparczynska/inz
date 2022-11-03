@@ -1,7 +1,7 @@
 @isTest
 public with sharing class ShowProductsInDishTest {
     @TestSetup
-    public static void makeData(){
+    static void makeData(){
         Dish__c dish = new Dish__c();
         Dish__c dishWithoutProd = new Dish__c(Name='No Products');
         insert new List<Dish__c>{dish, dishWithoutProd};

@@ -5,7 +5,7 @@
         <name>addTop1</name>
         <label>addTop1</label>
         <locationX>264</locationX>
-        <locationY>996</locationY>
+        <locationY>1116</locationY>
         <assignmentItems>
             <assignToReference>listUsers</assignToReference>
             <operator>Add</operator>
@@ -21,7 +21,7 @@
         <name>addTop2</name>
         <label>addTop2</label>
         <locationX>528</locationX>
-        <locationY>996</locationY>
+        <locationY>1116</locationY>
         <assignmentItems>
             <assignToReference>listUsers</assignToReference>
             <operator>Add</operator>
@@ -37,7 +37,7 @@
         <name>addTop3</name>
         <label>addTop3</label>
         <locationX>792</locationX>
-        <locationY>996</locationY>
+        <locationY>1116</locationY>
         <assignmentItems>
             <assignToReference>listUsers</assignToReference>
             <operator>Add</operator>
@@ -53,7 +53,7 @@
         <name>singleRankingHasUser</name>
         <label>singleRankingHasUser</label>
         <locationX>264</locationX>
-        <locationY>1788</locationY>
+        <locationY>1908</locationY>
         <assignmentItems>
             <assignToReference>rankingHasUserSingle.User__c</assignToReference>
             <operator>Assign</operator>
@@ -73,10 +73,58 @@
         </connector>
     </assignments>
     <assignments>
+        <name>singleUserTop1</name>
+        <label>singleUserTop1</label>
+        <locationX>264</locationX>
+        <locationY>996</locationY>
+        <assignmentItems>
+            <assignToReference>singleUser.Special_points__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>specialPointsTop1</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>addTop1</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>singleUserTop2</name>
+        <label>singleUserTop2</label>
+        <locationX>528</locationX>
+        <locationY>996</locationY>
+        <assignmentItems>
+            <assignToReference>singleUser.Special_points__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>specialPointsTop2</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>addTop2</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>singleUserTop3</name>
+        <label>singleUserTop3</label>
+        <locationX>792</locationX>
+        <locationY>996</locationY>
+        <assignmentItems>
+            <assignToReference>singleUser.Special_points__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>specialPointsTop3</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>addTop3</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>toListAddRankingHasUser</name>
         <label>toListAddRankingHasUser</label>
         <locationX>264</locationX>
-        <locationY>1908</locationY>
+        <locationY>2028</locationY>
         <assignmentItems>
             <assignToReference>rankingHasUserList</assignToReference>
             <operator>Add</operator>
@@ -100,15 +148,8 @@
                 <elementReference>prize.User__r.Id</elementReference>
             </value>
         </assignmentItems>
-        <assignmentItems>
-            <assignToReference>singleUser.Special_points__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>specialPointsTop1</elementReference>
-            </value>
-        </assignmentItems>
         <connector>
-            <targetReference>addTop1</targetReference>
+            <targetReference>singleUserTop1</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -123,15 +164,8 @@
                 <elementReference>prize.User__r.Id</elementReference>
             </value>
         </assignmentItems>
-        <assignmentItems>
-            <assignToReference>singleUser.Special_points__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>specialPointsTop2</elementReference>
-            </value>
-        </assignmentItems>
         <connector>
-            <targetReference>addTop2</targetReference>
+            <targetReference>singleUserTop2</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -146,15 +180,8 @@
                 <elementReference>prize.User__r.Id</elementReference>
             </value>
         </assignmentItems>
-        <assignmentItems>
-            <assignToReference>singleUser.Special_points__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>specialPointsTop3</elementReference>
-            </value>
-        </assignmentItems>
         <connector>
-            <targetReference>addTop3</targetReference>
+            <targetReference>singleUserTop3</targetReference>
         </connector>
     </assignments>
     <decisions>
@@ -212,6 +239,7 @@
             <label>top3</label>
         </rules>
     </decisions>
+    <environments>Default</environments>
     <formulas>
         <name>endDate</name>
         <dataType>Date</dataType>
@@ -225,19 +253,19 @@
     <formulas>
         <name>specialPointsTop1</name>
         <dataType>Number</dataType>
-        <expression>{!singleUser.Special_points__c}+750</expression>
+        <expression>{!prize.User__r.Special_points__c}+750</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
         <name>specialPointsTop2</name>
         <dataType>Number</dataType>
-        <expression>{!singleUser.Special_points__c}+500</expression>
+        <expression>{!prize.User__r.Special_points__c}+500</expression>
         <scale>0</scale>
     </formulas>
     <formulas>
         <name>specialPointsTop3</name>
         <dataType>Number</dataType>
-        <expression>{!singleUser.Special_points__c}+250</expression>
+        <expression>{!prize.User__r.Special_points__c}+250</expression>
         <scale>0</scale>
     </formulas>
     <interviewLabel>Ranking management {!$Flow.CurrentDateTime}</interviewLabel>
@@ -246,7 +274,7 @@
         <name>forUsers</name>
         <label>forUsers</label>
         <locationX>176</locationX>
-        <locationY>1668</locationY>
+        <locationY>1788</locationY>
         <collectionReference>getUsers</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -316,7 +344,7 @@
         <name>createRankingHasUser</name>
         <label>createRankingHasUser</label>
         <locationX>176</locationX>
-        <locationY>2124</locationY>
+        <locationY>2244</locationY>
         <inputReference>rankingHasUserList</inputReference>
     </recordCreates>
     <recordLookups>
@@ -386,11 +414,40 @@
         <name>getUsers</name>
         <label>getUsers</label>
         <locationX>176</locationX>
-        <locationY>1548</locationY>
+        <locationY>1668</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>forUsers</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FirstName</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Integration</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Security</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Automated</stringValue>
+            </value>
+        </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>User</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -399,7 +456,7 @@
         <name>updateSpecialPoints</name>
         <label>updateSpecialPoints</label>
         <locationX>176</locationX>
-        <locationY>1308</locationY>
+        <locationY>1428</locationY>
         <connector>
             <targetReference>zeroPoints</targetReference>
         </connector>
@@ -409,10 +466,39 @@
         <name>zeroPoints</name>
         <label>zeroPoints</label>
         <locationX>176</locationX>
-        <locationY>1428</locationY>
+        <locationY>1548</locationY>
         <connector>
             <targetReference>getUsers</targetReference>
         </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FirstName</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Integration</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Security</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FirstName</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Automated</stringValue>
+            </value>
+        </filters>
         <inputAssignments>
             <field>Activity_points__c</field>
             <value>

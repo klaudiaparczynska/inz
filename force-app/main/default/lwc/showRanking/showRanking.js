@@ -1,10 +1,16 @@
 import { LightningElement, api } from 'lwc';
 const rankingDetails= [
     {
-        label: 'Position', fieldName: 'Position'
+        label: 'Position', fieldName: 'Position', cellAttributes:{
+            class:{fieldName:'amountColor'}
+        }
     },
-    {label: 'Name', fieldName: 'Name'},
-    {label: 'Activity points', fieldName: 'Points'}
+    {label: 'Name', fieldName: 'Name' , cellAttributes:{
+        class:{fieldName:'amountColor'}
+    }},
+    {label: 'Activity points', fieldName: 'Points', cellAttributes:{
+        class:{fieldName:'amountColor'}
+    }}
 ];
 export default class ShowRanking extends LightningElement {
     @api rankings;
@@ -40,6 +46,9 @@ export default class ShowRanking extends LightningElement {
                 })
             }
         }
+        helper.forEach(currentItem => {
+            currentItem.amountColor = currentItem.Position <= 3 ? "slds-text-color_success" : "";
+        });
         this.ranking = helper;
         this.totalRecords = this.ranking.length;                 
         this.pageSize = this.pageSizeOptions[0];

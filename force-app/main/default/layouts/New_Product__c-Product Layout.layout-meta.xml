@@ -11,7 +11,7 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Barcode__c</field>
             </layoutItems>
             <layoutItems>
@@ -33,6 +33,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Carbohydrates__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>External_Id__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

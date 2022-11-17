@@ -77,7 +77,9 @@
             <label>ifExist</label>
         </rules>
     </decisions>
+    <environments>Default</environments>
     <interviewLabel>Show activities {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Show activities</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -149,6 +151,7 @@
         <object>Activity_Log__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>activities</name>
         <label>activities</label>

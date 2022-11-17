@@ -148,7 +148,7 @@ export default class TotalReports extends LightningElement {
             let consumedProtein = JSON.parse(this.summary[0].protein);
             let consumedCarbs = JSON.parse(this.summary[0].carbohydrates);
             this.updateChart(consumedKcal, "Consumed", consumedKcal, this.chart);
-            this.updateChart((this.infos[0] - consumedKcal).toFixed(2), "To consume", (this.infos[0] - consumedKcal).toFixed(2), this.chart);
+            this.updateChart((this.infos[0] - consumedKcal).toFixed(0), "To consume", (this.infos[0] - consumedKcal).toFixed(0), this.chart);
             this.updateChart(consumedFat, "Consumed", consumedFat, this.chartFat);
             this.updateChart((this.infos[1] - consumedFat).toFixed(2), "To consume", (this.infos[1] - consumedFat).toFixed(2), this.chartFat);
             this.updateChart(consumedProtein, "Consumed", consumedProtein, this.chartProtein);

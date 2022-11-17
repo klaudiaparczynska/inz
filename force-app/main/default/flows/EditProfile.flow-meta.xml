@@ -25,6 +25,7 @@
         <picklistField>PAL__c</picklistField>
         <picklistObject>User</picklistObject>
     </dynamicChoiceSets>
+    <environments>Default</environments>
     <formulas>
         <name>BMR</name>
         <dataType>Number</dataType>
@@ -70,7 +71,8 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
         <scale>2</scale>
     </formulas>
     <interviewLabel>EditProfile {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>EditProfile</label>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
+    <label>Edit Profile</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -162,14 +164,15 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
         </inputAssignments>
         <object>User</object>
     </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Edit_Profile</name>
         <label>Edit Profile</label>
         <locationX>176</locationX>
         <locationY>278</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>User_profile_update</targetReference>
         </connector>
@@ -182,7 +185,7 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>Gender</fieldText>
             <fieldType>DropdownBox</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Age</name>
@@ -192,7 +195,7 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>Age</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <validationRule>
                 <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Selected age:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Age}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;is not correct!&lt;/span&gt;&lt;/p&gt;</errorMessage>
@@ -208,7 +211,7 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>Goal</fieldText>
             <fieldType>DropdownBox</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Height</name>
@@ -218,7 +221,7 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>Height in cm</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <validationRule>
                 <errorMessage>&lt;p&gt;Selected height: &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Height}&lt;/span&gt; is not correct!&lt;/p&gt;</errorMessage>
@@ -233,7 +236,7 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>Weight in kg</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>1</scale>
             <validationRule>
                 <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Selected weight:&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!Weight}&lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&amp;nbsp;is not correct!&lt;/span&gt;&lt;/p&gt;</errorMessage>
@@ -249,8 +252,9 @@ IF(TEXT({!userData.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR
             </defaultValue>
             <fieldText>PAL</fieldText>
             <fieldType>DropdownBox</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
+        <nextOrFinishButtonLabel>Update</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>

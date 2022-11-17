@@ -96,7 +96,9 @@
             <label>EqualsValueSlider</label>
         </rules>
     </decisions>
+    <environments>Default</environments>
     <interviewLabel>Create dish {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Create dish</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -141,6 +143,7 @@
         <locationY>638</locationY>
         <inputReference>Collection</inputReference>
     </recordCreates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Create_dish</name>
         <label>Create dish</label>
@@ -232,6 +235,12 @@
                     <stringValue>Dish_has_product__c</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -241,7 +250,7 @@
             <dataType>Number</dataType>
             <fieldText>Grammage</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <validationRule>
                 <errorMessage>&lt;p&gt;Selected grammage: {!Grammage} is not correct!&lt;/p&gt;</errorMessage>

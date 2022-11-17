@@ -280,6 +280,7 @@
         <sortOrder>Asc</sortOrder>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
+    <environments>Default</environments>
     <formulas>
         <name>getMealTypeName</name>
         <dataType>String</dataType>
@@ -292,6 +293,7 @@
         <scale>0</scale>
     </formulas>
     <interviewLabel>Add product or dish {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Add product or dish</label>
     <loops>
         <name>loopMeals</name>
@@ -471,6 +473,7 @@
         <object>Meal_Type__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Date</name>
         <label>Date</label>

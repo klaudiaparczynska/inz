@@ -3,6 +3,7 @@
     <apiVersion>56.0</apiVersion>
     <environments>Default</environments>
     <interviewLabel>Change dish grammage {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Change dish grammage</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -65,6 +66,7 @@
         </inputAssignments>
         <object>Meal_type_has_dish__c</object>
     </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>dishInfos</name>
         <label>dishInfos</label>
@@ -89,8 +91,8 @@
             <isRequired>true</isRequired>
             <scale>0</scale>
             <validationRule>
-                <errorMessage>&lt;p&gt;Inserted grammage {!Grammage} is not correct! The value given should be between 0 and 10000.&lt;/p&gt;</errorMessage>
-                <formulaExpression>{!Grammage}&gt;0 &amp;&amp;  {!Grammage}&lt;10000</formulaExpression>
+                <errorMessage>&lt;p&gt;Inserted grammage {!Change_grammage} is not correct! The value given should be between 0 and 10000.&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Change_grammage} &gt; 0 &amp;&amp; {!Change_grammage} &lt; 10000</formulaExpression>
             </validationRule>
         </fields>
         <nextOrFinishButtonLabel>Update</nextOrFinishButtonLabel>

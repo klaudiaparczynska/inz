@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
+    <environments>Default</environments>
     <interviewLabel>Create activity {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Create activity</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -42,6 +44,7 @@
         <object>Activity__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>activity</name>
         <label>activity</label>
@@ -67,6 +70,10 @@
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Burned calories {!Burned_calories_1h} is not correct!&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Burned_calories_1h} &gt; 0</formulaExpression>
+            </validationRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

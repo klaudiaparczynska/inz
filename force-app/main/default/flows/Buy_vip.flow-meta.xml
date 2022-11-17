@@ -28,6 +28,7 @@
     </decisions>
     <environments>Default</environments>
     <interviewLabel>Buy vip {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Buy vip</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -113,6 +114,7 @@
         </inputAssignments>
         <object>User</object>
     </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>noPoints</name>
         <label>noPoints</label>

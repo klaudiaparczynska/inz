@@ -20,7 +20,9 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>56.0</apiVersion>
+    <environments>Default</environments>
     <interviewLabel>Show ranking {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Show ranking</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -92,6 +94,7 @@
         <sortOrder>Desc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>printRanking</name>
         <label>printRanking</label>

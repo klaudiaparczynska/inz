@@ -49,7 +49,9 @@
         <object>Activity__c</object>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
+    <environments>Default</environments>
     <interviewLabel>Add activity {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Add activity</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -147,6 +149,7 @@
         <object>Activity_Log__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Add_activity</name>
         <label>Add activity</label>

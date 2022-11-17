@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
+    <assignments>
+        <name>Asignemn</name>
+        <label>Asignemn</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <assignmentItems>
+            <assignToReference>Calories</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Kcal</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>UpdateTotalMacros</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
     <formulas>
         <name>BMR</name>
         <dataType>Number</dataType>
@@ -31,14 +48,14 @@ IF(TEXT({!$Record.PAL__c})  = &apos;Daily exercises&apos;, 2.0*{!PPM}, 2.4*{!PPM
     <formulas>
         <name>Kcal</name>
         <dataType>Number</dataType>
-        <expression>IF(TEXT({!$Record.Goal__c})  = &apos;Rapid weight loss&apos;, {!BMR}+1000,
-IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight loss&apos;, {!BMR}+750,
-IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight loss&apos;, {!BMR}+500,
-IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight loss&apos;, {!BMR}+250,
+        <expression>IF(TEXT({!$Record.Goal__c})  = &apos;Rapid weight loss&apos;, {!BMR}-1000,
+IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight loss&apos;, {!BMR}-750,
+IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight loss&apos;, {!BMR}-500,
+IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight loss&apos;, {!BMR}-250,
 IF(TEXT({!$Record.Goal__c})  = &apos;Keeping weight&apos;, {!BMR},
-IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight gain&apos;, {!BMR}-250, 
-IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight gain&apos;, {!BMR}-500,
-IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}-1000
+IF(TEXT({!$Record.Goal__c})  = &apos;Slow weight gain&apos;, {!BMR}+250, 
+IF(TEXT({!$Record.Goal__c})  = &apos;Moderate weight gain&apos;, {!BMR}+500,
+IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}+750, {!BMR}+1000
 )
 )
 )
@@ -52,9 +69,8 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
     <formulas>
         <name>PPM</name>
         <dataType>Number</dataType>
-        <expression>IF(TEXT({!$Record.Gender__c}) = &apos;Male&apos;,
- 66+(13.75*{!$Record.Weight__c})+(5*{!$Record.Height__c})-(6.8*{!$Record.Age__c}),
- 655+(9.56*{!$Record.Weight__c})+(1.85*{!$Record.Height__c})-(4.7*{!$Record.Age__c}))</expression>
+        <expression>IF(ISPICKVAL({!$Record.Gender__c}, &apos;Male&apos;),66+(13.75*{!$Record.Weight__c})+(5*{!$Record.Height__c})-(6.8*{!$Record.Age__c}),
+655+(9.56*{!$Record.Weight__c})+(1.85*{!$Record.Height__c})-(4.7*{!$Record.Age__c}))</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
@@ -62,6 +78,12 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
         <dataType>Number</dataType>
         <expression>({!Kcal}*0.3)/4</expression>
         <scale>1</scale>
+    </formulas>
+    <formulas>
+        <name>Test</name>
+        <dataType>Number</dataType>
+        <expression>1000</expression>
+        <scale>2</scale>
     </formulas>
     <interviewLabel>SetTotalMacros {!$Flow.CurrentDateTime}</interviewLabel>
     <label>SetTotalMacros</label>
@@ -88,11 +110,11 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
         <name>UpdateTotalMacros</name>
         <label>UpdateTotalMacros</label>
         <locationX>176</locationX>
-        <locationY>335</locationY>
+        <locationY>431</locationY>
         <inputAssignments>
             <field>Total_Calories__c</field>
             <value>
-                <elementReference>Kcal</elementReference>
+                <elementReference>Calories</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -119,11 +141,22 @@ IF(TEXT({!$Record.Goal__c})  = &apos;Quick weight gain&apos;, {!BMR}-750, {!BMR}
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>UpdateTotalMacros</targetReference>
+            <targetReference>Asignemn</targetReference>
         </connector>
         <object>User</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
+        <triggerType>RecordBeforeSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>Calories</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
 </Flow>

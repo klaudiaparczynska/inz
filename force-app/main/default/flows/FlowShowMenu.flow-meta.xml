@@ -203,7 +203,32 @@
         <dataType>String</dataType>
         <expression>{!$User.FirstName}&amp;{!$User.LastName}&amp;{!$User.Username}&amp;TEXT({!singleMealType.Date__c})&amp;{!singleMealType.Descriptor__r.Name}</expression>
     </formulas>
+    <formulas>
+        <name>totalUserCalories</name>
+        <dataType>Number</dataType>
+        <expression>{!$User.Total_Calories__c}</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>totalUserCarbos</name>
+        <dataType>Number</dataType>
+        <expression>{!$User.Total_Carbohydrates__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>totalUserFat</name>
+        <dataType>Number</dataType>
+        <expression>{!$User.Total_Fat__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>totalUserProtein</name>
+        <dataType>Number</dataType>
+        <expression>{!$User.Total_Proteins__c}</expression>
+        <scale>2</scale>
+    </formulas>
     <interviewLabel>FlowShowMenu {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Your menu</label>
     <loops>
         <name>createMealTypes</name>
@@ -331,6 +356,7 @@
         <object>Meal_Type__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>getDate</name>
         <label>getDate</label>
@@ -520,7 +546,7 @@
         </fields>
         <fields>
             <name>displayMacros</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Calories: &lt;/strong&gt;{!totalCalories} kcal/{!$User.Total_Calories__c} kcal&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Proteins: &lt;/strong&gt;{!totalProteins} g/{!$User.Total_Proteins__c} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Fats:&lt;/strong&gt; {!totalFats} g/{!$User.Total_Fat__c} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Carbohydrates: &lt;/strong&gt;{!totalCarbohydrates} g/{!$User.Total_Carbohydrates__c} g&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;strong&gt;Calories: &lt;/strong&gt;{!totalCalories} kcal/{!totalUserCalories} kcal&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Proteins: &lt;/strong&gt;{!totalProteins} g/{!totalUserProtein} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Fats:&lt;/strong&gt; {!totalFats} g/{!totalUserFat} g&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Carbohydrates: &lt;/strong&gt;{!totalCarbohydrates} g/{!totalUserCarbos} g&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -571,7 +597,7 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
-        <scale>2</scale>
+        <scale>0</scale>
         <value>
             <numberValue>0.0</numberValue>
         </value>

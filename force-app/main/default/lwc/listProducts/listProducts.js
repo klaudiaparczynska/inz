@@ -36,7 +36,9 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
     @track markers;
     @track error;
     columns=productDetails;
-    productsAndDishes;
+    @track productsAndDishes;
+    @track finalPD;
+    urls = [];
 
 
     connectedCallback(){
@@ -52,16 +54,32 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 }).map(v => {
                     return v.Id;
                 });
-
                 helper.push({
                     Id: mealTypeHasProductId[0],
                     Name: this.products[i].name,
-                    Calories:  this.products[i].calories,
-                    Protein: this.products[i].protein,
-                    Fat: this.products[i].fat,
-                    Carbohydrates: this.products[i].carbohydrates,
-                    LinkName : '/' + mealTypeHasProductId[0]
+                    Calories:  (this.products[i].calories).toFixed(0),
+                    Protein: (this.products[i].protein).toFixed(2),
+                    Fat: (this.products[i].fat).toFixed(2),
+                    Carbohydrates: (this.products[i].carbohydrates).toFixed(2),
+                    LinkName : ''
                 })
+                this[NavigationMixin.GenerateUrl]({
+                    type: 'standard__recordPage',
+                    attributes: {
+                        recordId: mealTypeHasProductId[0],
+                        actionName: 'view',
+                    },
+                }).then((url) => {
+                    this.urls.push({
+                        Id: mealTypeHasProductId[0],
+                        Url: url
+                    })
+                    if(this.urls.length == this.productsAndDishes.length){
+                        console.log(this.urls.length);
+                        console.log(this.productsAndDishes.length);
+                        this.showLinks();
+                    }
+                });
             }
         }
         if (this.dishes) {
@@ -72,20 +90,46 @@ export default class ListProducts extends NavigationMixin(LightningElement) {
                 }).map(v=>{
                     return v.Id;
                 });
-
                 helper.push({
                     Id: mealTypeHasDishId[0],
                     Name: this.dishes[i].name,
-                    Calories:  this.dishes[i].calories,
-                    Protein: this.dishes[i].protein,
-                    Fat: this.dishes[i].fat,
-                    Carbohydrates: this.dishes[i].carbohydrates,
-                    LinkName : '/' + mealTypeHasDishId[0]
+                    Calories:  (this.dishes[i].calories).toFixed(0),
+                    Protein: (this.dishes[i].protein).toFixed(2),
+                    Fat: (this.dishes[i].fat).toFixed(2),
+                    Carbohydrates: (this.dishes[i].carbohydrates).toFixed(2),
+                    LinkName : ''
                 })
+                this[NavigationMixin.GenerateUrl]({
+                    type: 'standard__recordPage',
+                    attributes: {
+                        recordId: mealTypeHasDishId[0],
+                        actionName: 'view',
+                    },
+                }).then((url) => {
+                    this.urls.push({
+                        Id: mealTypeHasDishId[0],
+                        Url: url
+                    })
+                    if(this.urls.length == this.productsAndDishes.length){
+                        console.log(this.urls.length);
+                        console.log(this.productsAndDishes.length);
+                        this.showLinks();
+                    }
+                });
             }  
         }
         this.productsAndDishes = helper;
     } 
+    showLinks(){
+        for(let i = 0; i < this.productsAndDishes.length; i++){
+            let u = this.urls.filter(u => u.Id == this.productsAndDishes[i].Id);
+            console.log(u);
+            if(u){
+                this.productsAndDishes[i].LinkName = u[0].Url;
+            }
+        }
+        this.finalPD = this.productsAndDishes;
+    }
     
     handleRowAction(event) {
         const actionName = event.detail.action.name;

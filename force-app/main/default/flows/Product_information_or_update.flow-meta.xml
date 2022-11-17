@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
+    <environments>Default</environments>
     <interviewLabel>Product information or update {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Product information or update</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -64,6 +66,7 @@
         </inputAssignments>
         <object>Meal_type_has_product__c</object>
     </recordUpdates>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>infoAboutProduct</name>
         <label>infoAboutProduct</label>
@@ -85,8 +88,12 @@
             <dataType>Number</dataType>
             <fieldText>Grammage</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Grammage {!Grammage} is not correct! The value given should be between 0 and 10000.&lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Grammage} &gt; 0 &amp;&amp; {!Grammage} &lt; 10000</formulaExpression>
+            </validationRule>
         </fields>
         <nextOrFinishButtonLabel>Update</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>

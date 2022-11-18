@@ -136,6 +136,12 @@
                 <identifier>flowruntime_interview</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>showProductsInDish</componentName>
+                <identifier>c_showProductsInDish</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
         <type>Region</type>

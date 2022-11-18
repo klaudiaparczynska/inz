@@ -81,13 +81,6 @@
                 </componentInstanceProperties>
                 <componentName>flowruntime:interview</componentName>
                 <identifier>flowruntime_interview5</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!$User.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>VIP</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>right</name>

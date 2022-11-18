@@ -89,11 +89,6 @@
             <table>Meal_Type__c.MealTypeHasDishes__r</table>
         </columns>
         <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
-            <table>Meal_Type__c.MealTypeHasDishes__r</table>
-        </columns>
-        <columns>
             <checkedByDefault>true</checkedByDefault>
             <field>Name</field>
             <table>Meal_Type__c.MealTypeHasDishes__r</table>

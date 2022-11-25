@@ -162,6 +162,58 @@
         <field>User.Weight__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Add_activity</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Add_product_or_dish</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Buy_vip</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Change_dish_grammage</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Create_activity</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Create_dish</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Create_product</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>EditProfile</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>FlowShowMenu</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Product_information_or_update</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Show_activities</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Show_ranking</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Your_account</flow>
+    </flowAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Edit All</label>
     <objectPermissions>
